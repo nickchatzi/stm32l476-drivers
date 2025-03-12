@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "TEST.C": "cpp",
+        "gpio_driver.h": "c",
+        "spi_driver.h": "c"
+    }
+}
