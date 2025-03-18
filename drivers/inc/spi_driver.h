@@ -20,6 +20,23 @@ typedef struct
 
 /*********************************************************************/
 
+/********************STRUCTURE FOR SPIx PIN HANDLE********************/
+
+typedef struct
+{
+    SPI_RegDef  *pSPIx;         //Holds the base address (x:1,2,3) peripheral
+    SPI_Config  SPIConfig;
+    uint8_t     *pTxBuffer;     //To store the application Tx buffer address.
+    uint8_t     *pRxBuffer;     //To store the application Rx buffer address.
+    uint32_t    TxLen;          //To store Tx Length
+    uint32_t    RxLen;          //To store Rx Length
+    uint8_t     TxState;        //To store Tx State
+    uint8_t     RxState;        //To store Rx State
+
+}SPI_Handle;
+
+/*********************************************************************/
+
 /*************************DEVICE MODE MACROS**************************/
 
 #define SPI_DEVICE_MODE_SLAVE               0
@@ -97,23 +114,6 @@ typedef struct
 
 /*********************************************************************/
 
-/********************STRUCTURE FOR SPIx PIN HANDLE********************/
-
-typedef struct
-{
-    SPI_RegDef  *pSPIx;         //Holds the base address (x:1,2,3) peripheral
-    SPI_Config  SPIConfig;
-    uint8_t     *pTxBuffer;     //To store the application Tx buffer address.
-    uint8_t     *pRxBuffer;     //To store the application Rx buffer address.
-    uint32_t    TxLen;          //To store Tx Length
-    uint32_t    RxLen;          //To store Rx Length
-    uint8_t     TxState;        //To store Tx State
-    uint8_t     RxState;        //To store Rx State
-
-}SPI_Handle;
-
-/*********************************************************************/
-
 /********************CR1 REGISTER BIT DEFINITIONS*********************/
 
 #define CPHA                                0    
@@ -167,9 +167,9 @@ typedef struct
 
 /**********************STATUS FLAGS DEFINITIONS***********************/
 
-#define SPI_TXE_FLAG                        ( 1 << TXE)   //status to check if TX buffer is empty or not
-#define SPI_RXNE_FLAG                       ( 1 << RXNE)   //status to check if RX buffer is empty or not
-#define SPI_BUSY_FLAG                       ( 1 << BSY)   //status to check if transmittion of data has ended or not
+#define SPI_FLAG_TXE                        ( 1 << TXE)   //status to check if TX buffer is empty or not
+#define SPI_FLAG_RXNE                       ( 1 << RXNE)   //status to check if RX buffer is empty or not
+#define SPI_FLAG_BUSY                       ( 1 << BSY)   //status to check if transmittion of data has ended or not
 
 /*********************************************************************/
 

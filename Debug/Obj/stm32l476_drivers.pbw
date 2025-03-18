@@ -9349,13 +9349,27 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@2933@macro@SPI_EVENT_OVR_ERR",
+    "ID": "c:spi_driver.h@2933@macro@SPI_EVENT_MODF_ERR",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "SPI_EVENT_MODF_ERR",
+    "location": {
+      "column": "9",
+      "line": "93",
+      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
+    },
+    "name": "SPI_EVENT_MODF_ERR",
+    "origin": "user_include",
+    "scope": null
+  },
+  {
+    "ID": "c:spi_driver.h@2980@macro@SPI_EVENT_OVR_ERR",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "SPI_EVENT_OVR_ERR",
     "location": {
       "column": "9",
-      "line": "93",
+      "line": "94",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_EVENT_OVR_ERR",
@@ -9363,16 +9377,30 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@2980@macro@SPI_EVENT_CRC_ERR",
+    "ID": "c:spi_driver.h@3027@macro@SPI_EVENT_CRC_ERR",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "SPI_EVENT_CRC_ERR",
     "location": {
       "column": "9",
-      "line": "94",
+      "line": "95",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_EVENT_CRC_ERR",
+    "origin": "user_include",
+    "scope": null
+  },
+  {
+    "ID": "c:spi_driver.h@3074@macro@SPI_EVENT_FRE_ERR",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "SPI_EVENT_FRE_ERR",
+    "location": {
+      "column": "9",
+      "line": "96",
+      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
+    },
+    "name": "SPI_EVENT_FRE_ERR",
     "origin": "user_include",
     "scope": null
   },
@@ -9383,7 +9411,7 @@
     "display": "",
     "location": {
       "column": "9",
-      "line": "100",
+      "line": "102",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "members": [
@@ -9394,12 +9422,12 @@
         "display": "pSPIx",
         "location": {
           "column": "18",
-          "line": "102",
+          "line": "104",
           "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
         },
         "name": "pSPIx",
         "origin": "user_include",
-        "scope": "_anonymous_spi_driver_h_100_9"
+        "scope": "_anonymous_spi_driver_h_102_9"
       },
       {
         "ID": "c:@SA@SPI_Handle@FI@SPIConfig",
@@ -9408,12 +9436,12 @@
         "display": "SPIConfig",
         "location": {
           "column": "17",
-          "line": "103",
+          "line": "105",
           "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
         },
         "name": "SPIConfig",
         "origin": "user_include",
-        "scope": "_anonymous_spi_driver_h_100_9"
+        "scope": "_anonymous_spi_driver_h_102_9"
       },
       {
         "ID": "c:@SA@SPI_Handle@FI@pTxBuffer",
@@ -9422,12 +9450,12 @@
         "display": "pTxBuffer",
         "location": {
           "column": "18",
-          "line": "104",
+          "line": "106",
           "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
         },
         "name": "pTxBuffer",
         "origin": "user_include",
-        "scope": "_anonymous_spi_driver_h_100_9"
+        "scope": "_anonymous_spi_driver_h_102_9"
       },
       {
         "ID": "c:@SA@SPI_Handle@FI@pRxBuffer",
@@ -9436,12 +9464,12 @@
         "display": "pRxBuffer",
         "location": {
           "column": "18",
-          "line": "105",
+          "line": "107",
           "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
         },
         "name": "pRxBuffer",
         "origin": "user_include",
-        "scope": "_anonymous_spi_driver_h_100_9"
+        "scope": "_anonymous_spi_driver_h_102_9"
       },
       {
         "ID": "c:@SA@SPI_Handle@FI@TxLen",
@@ -9450,12 +9478,12 @@
         "display": "TxLen",
         "location": {
           "column": "17",
-          "line": "106",
+          "line": "108",
           "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
         },
         "name": "TxLen",
         "origin": "user_include",
-        "scope": "_anonymous_spi_driver_h_100_9"
+        "scope": "_anonymous_spi_driver_h_102_9"
       },
       {
         "ID": "c:@SA@SPI_Handle@FI@RxLen",
@@ -9464,12 +9492,12 @@
         "display": "RxLen",
         "location": {
           "column": "17",
-          "line": "107",
+          "line": "109",
           "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
         },
         "name": "RxLen",
         "origin": "user_include",
-        "scope": "_anonymous_spi_driver_h_100_9"
+        "scope": "_anonymous_spi_driver_h_102_9"
       },
       {
         "ID": "c:@SA@SPI_Handle@FI@TxState",
@@ -9478,12 +9506,12 @@
         "display": "TxState",
         "location": {
           "column": "17",
-          "line": "108",
+          "line": "110",
           "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
         },
         "name": "TxState",
         "origin": "user_include",
-        "scope": "_anonymous_spi_driver_h_100_9"
+        "scope": "_anonymous_spi_driver_h_102_9"
       },
       {
         "ID": "c:@SA@SPI_Handle@FI@RxState",
@@ -9492,12 +9520,12 @@
         "display": "RxState",
         "location": {
           "column": "17",
-          "line": "109",
+          "line": "111",
           "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
         },
         "name": "RxState",
         "origin": "user_include",
-        "scope": "_anonymous_spi_driver_h_100_9"
+        "scope": "_anonymous_spi_driver_h_102_9"
       },
       {
         "ID": "c:@T@SPI_Handle",
@@ -9506,12 +9534,12 @@
         "display": "struct SPI_Handle",
         "location": {
           "column": "2",
-          "line": "111",
+          "line": "113",
           "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
         },
         "name": "SPI_Handle",
         "origin": "user_include",
-        "scope": "_anonymous_spi_driver_h_100_9"
+        "scope": "_anonymous_spi_driver_h_102_9"
       }
     ],
     "name": "",
@@ -9519,13 +9547,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@3845@macro@CPHA",
+    "ID": "c:spi_driver.h@3939@macro@CPHA",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "CPHA",
     "location": {
       "column": "9",
-      "line": "117",
+      "line": "119",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "CPHA",
@@ -9533,13 +9561,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@3896@macro@CPOL",
+    "ID": "c:spi_driver.h@3990@macro@CPOL",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "CPOL",
     "location": {
       "column": "9",
-      "line": "118",
+      "line": "120",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "CPOL",
@@ -9547,13 +9575,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@3943@macro@MSTR",
+    "ID": "c:spi_driver.h@4037@macro@MSTR",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "MSTR",
     "location": {
       "column": "9",
-      "line": "119",
+      "line": "121",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "MSTR",
@@ -9561,13 +9589,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@3990@macro@BR",
+    "ID": "c:spi_driver.h@4084@macro@BR",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BR",
     "location": {
       "column": "9",
-      "line": "120",
+      "line": "122",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "BR",
@@ -9575,13 +9603,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4037@macro@SPE",
+    "ID": "c:spi_driver.h@4131@macro@SPE",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "SPE",
     "location": {
       "column": "9",
-      "line": "121",
+      "line": "123",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPE",
@@ -9589,13 +9617,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4084@macro@LSBFIRST",
+    "ID": "c:spi_driver.h@4178@macro@LSBFIRST",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "LSBFIRST",
     "location": {
       "column": "9",
-      "line": "122",
+      "line": "124",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "LSBFIRST",
@@ -9603,13 +9631,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4131@macro@SSI",
+    "ID": "c:spi_driver.h@4225@macro@SSI",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "SSI",
     "location": {
       "column": "9",
-      "line": "123",
+      "line": "125",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SSI",
@@ -9617,13 +9645,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4178@macro@SSM",
+    "ID": "c:spi_driver.h@4272@macro@SSM",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "SSM",
     "location": {
       "column": "9",
-      "line": "124",
+      "line": "126",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SSM",
@@ -9631,13 +9659,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4225@macro@RXONLY",
+    "ID": "c:spi_driver.h@4319@macro@RXONLY",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "RXONLY",
     "location": {
       "column": "9",
-      "line": "125",
+      "line": "127",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "RXONLY",
@@ -9645,13 +9673,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4273@macro@CRCL",
+    "ID": "c:spi_driver.h@4367@macro@CRCL",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "CRCL",
     "location": {
       "column": "9",
-      "line": "126",
+      "line": "128",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "CRCL",
@@ -9659,13 +9687,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4321@macro@CRCNEXT",
+    "ID": "c:spi_driver.h@4415@macro@CRCNEXT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "CRCNEXT",
     "location": {
       "column": "9",
-      "line": "127",
+      "line": "129",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "CRCNEXT",
@@ -9673,13 +9701,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4369@macro@CRCEN",
+    "ID": "c:spi_driver.h@4463@macro@CRCEN",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "CRCEN",
     "location": {
       "column": "9",
-      "line": "128",
+      "line": "130",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "CRCEN",
@@ -9687,13 +9715,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4417@macro@BIDIOE",
+    "ID": "c:spi_driver.h@4511@macro@BIDIOE",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BIDIOE",
     "location": {
       "column": "9",
-      "line": "129",
+      "line": "131",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "BIDIOE",
@@ -9701,13 +9729,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4465@macro@BIDIMODE",
+    "ID": "c:spi_driver.h@4559@macro@BIDIMODE",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BIDIMODE",
     "location": {
       "column": "9",
-      "line": "130",
+      "line": "132",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "BIDIMODE",
@@ -9715,13 +9743,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4665@macro@RXDMAEN",
+    "ID": "c:spi_driver.h@4759@macro@RXDMAEN",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "RXDMAEN",
     "location": {
       "column": "9",
-      "line": "136",
+      "line": "138",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "RXDMAEN",
@@ -9729,13 +9757,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4716@macro@TXDMAEN",
+    "ID": "c:spi_driver.h@4810@macro@TXDMAEN",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "TXDMAEN",
     "location": {
       "column": "9",
-      "line": "137",
+      "line": "139",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "TXDMAEN",
@@ -9743,13 +9771,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4763@macro@SSOE",
+    "ID": "c:spi_driver.h@4857@macro@SSOE",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "SSOE",
     "location": {
       "column": "9",
-      "line": "138",
+      "line": "140",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SSOE",
@@ -9757,13 +9785,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4810@macro@NSSP",
+    "ID": "c:spi_driver.h@4904@macro@NSSP",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "NSSP",
     "location": {
       "column": "9",
-      "line": "139",
+      "line": "141",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "NSSP",
@@ -9771,13 +9799,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4857@macro@FRF",
+    "ID": "c:spi_driver.h@4951@macro@FRF",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "FRF",
     "location": {
       "column": "9",
-      "line": "140",
+      "line": "142",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "FRF",
@@ -9785,13 +9813,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4904@macro@ERRIE",
+    "ID": "c:spi_driver.h@4998@macro@ERRIE",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "ERRIE",
     "location": {
       "column": "9",
-      "line": "141",
+      "line": "143",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "ERRIE",
@@ -9799,13 +9827,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4951@macro@RXNEIE",
+    "ID": "c:spi_driver.h@5045@macro@RXNEIE",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "RXNEIE",
     "location": {
       "column": "9",
-      "line": "142",
+      "line": "144",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "RXNEIE",
@@ -9813,13 +9841,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@4998@macro@TXEIE",
+    "ID": "c:spi_driver.h@5092@macro@TXEIE",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "TXEIE",
     "location": {
       "column": "9",
-      "line": "143",
+      "line": "145",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "TXEIE",
@@ -9827,13 +9855,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5045@macro@DS",
+    "ID": "c:spi_driver.h@5139@macro@DS",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "DS",
     "location": {
       "column": "9",
-      "line": "144",
+      "line": "146",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "DS",
@@ -9841,13 +9869,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5092@macro@FRXTH",
+    "ID": "c:spi_driver.h@5186@macro@FRXTH",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "FRXTH",
     "location": {
       "column": "9",
-      "line": "145",
+      "line": "147",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "FRXTH",
@@ -9855,13 +9883,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5140@macro@LDMA_RX",
+    "ID": "c:spi_driver.h@5234@macro@LDMA_RX",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "LDMA_RX",
     "location": {
       "column": "9",
-      "line": "146",
+      "line": "148",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "LDMA_RX",
@@ -9869,13 +9897,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5188@macro@LDMA_TX",
+    "ID": "c:spi_driver.h@5282@macro@LDMA_TX",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "LDMA_TX",
     "location": {
       "column": "9",
-      "line": "147",
+      "line": "149",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "LDMA_TX",
@@ -9883,13 +9911,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5388@macro@RXNE",
+    "ID": "c:spi_driver.h@5482@macro@RXNE",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "RXNE",
     "location": {
       "column": "9",
-      "line": "153",
+      "line": "155",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "RXNE",
@@ -9897,13 +9925,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5439@macro@TXE",
+    "ID": "c:spi_driver.h@5533@macro@TXE",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "TXE",
     "location": {
       "column": "9",
-      "line": "154",
+      "line": "156",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "TXE",
@@ -9911,13 +9939,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5486@macro@RESERVED",
+    "ID": "c:spi_driver.h@5580@macro@RESERVED",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "RESERVED",
     "location": {
       "column": "9",
-      "line": "155",
+      "line": "157",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "RESERVED",
@@ -9925,13 +9953,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5533@macro@CRCERR",
+    "ID": "c:spi_driver.h@5627@macro@CRCERR",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "CRCERR",
     "location": {
       "column": "9",
-      "line": "156",
+      "line": "158",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "CRCERR",
@@ -9939,13 +9967,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5580@macro@MODF",
+    "ID": "c:spi_driver.h@5674@macro@MODF",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "MODF",
     "location": {
       "column": "9",
-      "line": "157",
+      "line": "159",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "MODF",
@@ -9953,13 +9981,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5627@macro@OVR",
+    "ID": "c:spi_driver.h@5721@macro@OVR",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "OVR",
     "location": {
       "column": "9",
-      "line": "158",
+      "line": "160",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "OVR",
@@ -9967,13 +9995,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5674@macro@BSY",
+    "ID": "c:spi_driver.h@5768@macro@BSY",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BSY",
     "location": {
       "column": "9",
-      "line": "159",
+      "line": "161",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "BSY",
@@ -9981,13 +10009,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5721@macro@FRE",
+    "ID": "c:spi_driver.h@5815@macro@FRE",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "FRE",
     "location": {
       "column": "9",
-      "line": "160",
+      "line": "162",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "FRE",
@@ -9995,13 +10023,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5768@macro@FRLVL",
+    "ID": "c:spi_driver.h@5862@macro@FRLVL",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "FRLVL",
     "location": {
       "column": "9",
-      "line": "161",
+      "line": "163",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "FRLVL",
@@ -10009,13 +10037,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@5815@macro@FTLVL",
+    "ID": "c:spi_driver.h@5909@macro@FTLVL",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "FTLVL",
     "location": {
       "column": "9",
-      "line": "162",
+      "line": "164",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "FTLVL",
@@ -10023,13 +10051,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@6015@macro@SPI_TXE_FLAG",
+    "ID": "c:spi_driver.h@6109@macro@SPI_TXE_FLAG",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "SPI_TXE_FLAG",
     "location": {
       "column": "9",
-      "line": "168",
+      "line": "170",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_TXE_FLAG",
@@ -10037,13 +10065,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@6121@macro@SPI_RXNE_FLAG",
+    "ID": "c:spi_driver.h@6215@macro@SPI_RXNE_FLAG",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "SPI_RXNE_FLAG",
     "location": {
       "column": "9",
-      "line": "169",
+      "line": "171",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_RXNE_FLAG",
@@ -10051,13 +10079,13 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.h@6228@macro@SPI_BUSY_FLAG",
+    "ID": "c:spi_driver.h@6322@macro@SPI_BUSY_FLAG",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "SPI_BUSY_FLAG",
     "location": {
       "column": "9",
-      "line": "170",
+      "line": "172",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_BUSY_FLAG",
@@ -10071,21 +10099,7 @@
     "display": "void SPIPeripheralControl(SPI_RegDef *, uint8_t)",
     "location": {
       "column": "6",
-      "line": "174",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPIPeripheralControl",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPIPeripheralControl",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPIPeripheralControl(SPI_RegDef *, uint8_t)",
-    "location": {
-      "column": "6",
-      "line": "174",
+      "line": "176",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPIPeripheralControl",
@@ -10099,21 +10113,7 @@
     "display": "void SPI_PeriClockControl(SPI_RegDef *, uint8_t)",
     "location": {
       "column": "6",
-      "line": "177",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_PeriClockControl",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_PeriClockControl",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPI_PeriClockControl(SPI_RegDef *, uint8_t)",
-    "location": {
-      "column": "6",
-      "line": "177",
+      "line": "179",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_PeriClockControl",
@@ -10127,21 +10127,7 @@
     "display": "void SPI_Init(SPI_Handle *)",
     "location": {
       "column": "6",
-      "line": "180",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_Init",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_Init",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPI_Init(SPI_Handle *)",
-    "location": {
-      "column": "6",
-      "line": "180",
+      "line": "182",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_Init",
@@ -10155,21 +10141,7 @@
     "display": "void SPI_DeInit(SPI_RegDef *)",
     "location": {
       "column": "6",
-      "line": "181",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_DeInit",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_DeInit",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPI_DeInit(SPI_RegDef *)",
-    "location": {
-      "column": "6",
-      "line": "181",
+      "line": "183",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_DeInit",
@@ -10183,21 +10155,7 @@
     "display": "void SPI_SSIConfig(SPI_RegDef *, uint8_t)",
     "location": {
       "column": "6",
-      "line": "184",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_SSIConfig",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_SSIConfig",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPI_SSIConfig(SPI_RegDef *, uint8_t)",
-    "location": {
-      "column": "6",
-      "line": "184",
+      "line": "186",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_SSIConfig",
@@ -10211,21 +10169,7 @@
     "display": "void SPI_SSOEConfig(SPI_RegDef *, uint8_t)",
     "location": {
       "column": "6",
-      "line": "185",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_SSOEConfig",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_SSOEConfig",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPI_SSOEConfig(SPI_RegDef *, uint8_t)",
-    "location": {
-      "column": "6",
-      "line": "185",
+      "line": "187",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_SSOEConfig",
@@ -10239,21 +10183,7 @@
     "display": "uint8_t SPI_GetFlagStatus(SPI_RegDef *, uint32_t)",
     "location": {
       "column": "9",
-      "line": "188",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_GetFlagStatus",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_GetFlagStatus",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "uint8_t SPI_GetFlagStatus(SPI_RegDef *, uint32_t)",
-    "location": {
-      "column": "9",
-      "line": "188",
+      "line": "190",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_GetFlagStatus",
@@ -10267,21 +10197,7 @@
     "display": "void SPI_CloseTransmission(SPI_Handle *)",
     "location": {
       "column": "6",
-      "line": "190",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_CloseTransmission",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_CloseTransmission",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPI_CloseTransmission(SPI_Handle *)",
-    "location": {
-      "column": "6",
-      "line": "190",
+      "line": "192",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_CloseTransmission",
@@ -10295,21 +10211,7 @@
     "display": "void SPI_CloseReception(SPI_Handle *)",
     "location": {
       "column": "6",
-      "line": "191",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_CloseReception",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_CloseReception",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPI_CloseReception(SPI_Handle *)",
-    "location": {
-      "column": "6",
-      "line": "191",
+      "line": "193",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_CloseReception",
@@ -10323,21 +10225,7 @@
     "display": "void SPI_SendData(SPI_RegDef *, uint8_t *, uint32_t)",
     "location": {
       "column": "6",
-      "line": "194",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_SendData",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_SendData",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPI_SendData(SPI_RegDef *, uint8_t *, uint32_t)",
-    "location": {
-      "column": "6",
-      "line": "194",
+      "line": "196",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_SendData",
@@ -10351,21 +10239,7 @@
     "display": "void SPI_ReceiveData(SPI_RegDef *, uint8_t *, uint32_t)",
     "location": {
       "column": "6",
-      "line": "195",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_ReceiveData",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_ReceiveData",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPI_ReceiveData(SPI_RegDef *, uint8_t *, uint32_t)",
-    "location": {
-      "column": "6",
-      "line": "195",
+      "line": "197",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_ReceiveData",
@@ -10379,21 +10253,7 @@
     "display": "uint8_t SPI_SendDataIT(SPI_Handle *, uint8_t *, uint32_t)",
     "location": {
       "column": "9",
-      "line": "198",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_SendDataIT",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_SendDataIT",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "uint8_t SPI_SendDataIT(SPI_Handle *, uint8_t *, uint32_t)",
-    "location": {
-      "column": "9",
-      "line": "198",
+      "line": "200",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_SendDataIT",
@@ -10407,21 +10267,7 @@
     "display": "uint8_t SPI_ReceiveDataIT(SPI_Handle *, uint8_t *, uint32_t)",
     "location": {
       "column": "9",
-      "line": "199",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_ReceiveDataIT",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_ReceiveDataIT",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "uint8_t SPI_ReceiveDataIT(SPI_Handle *, uint8_t *, uint32_t)",
-    "location": {
-      "column": "9",
-      "line": "199",
+      "line": "201",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_ReceiveDataIT",
@@ -10435,21 +10281,7 @@
     "display": "void SPI_IRQInterruptConfig(uint8_t, uint8_t)",
     "location": {
       "column": "6",
-      "line": "202",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_IRQInterruptConfig",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_IRQInterruptConfig",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPI_IRQInterruptConfig(uint8_t, uint8_t)",
-    "location": {
-      "column": "6",
-      "line": "202",
+      "line": "204",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_IRQInterruptConfig",
@@ -10463,21 +10295,7 @@
     "display": "void SPI_IRQPriorityConfig(uint8_t, uint32_t)",
     "location": {
       "column": "6",
-      "line": "203",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_IRQPriorityConfig",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_IRQPriorityConfig",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPI_IRQPriorityConfig(uint8_t, uint32_t)",
-    "location": {
-      "column": "6",
-      "line": "203",
+      "line": "205",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_IRQPriorityConfig",
@@ -10491,21 +10309,7 @@
     "display": "void SPI_IRQHandling(SPI_Handle *)",
     "location": {
       "column": "6",
-      "line": "204",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPI_IRQHandling",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI_IRQHandling",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPI_IRQHandling(SPI_Handle *)",
-    "location": {
-      "column": "6",
-      "line": "204",
+      "line": "206",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPI_IRQHandling",
@@ -10519,21 +10323,7 @@
     "display": "void SPIApplicationEventCallback(SPI_Handle *, uint8_t)",
     "location": {
       "column": "6",
-      "line": "207",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
-    },
-    "name": "SPIApplicationEventCallback",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPIApplicationEventCallback",
-    "What": "Function",
-    "defdec": "Dec",
-    "display": "void SPIApplicationEventCallback(SPI_Handle *, uint8_t)",
-    "location": {
-      "column": "6",
-      "line": "207",
+      "line": "209",
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\inc\\spi_driver.h"
     },
     "name": "SPIApplicationEventCallback",
@@ -11003,7 +10793,7 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.c@19750@F@spi_ovr_err_interrupt_handle@temp",
+    "ID": "c:spi_driver.c@19749@F@spi_ovr_err_interrupt_handle@temp",
     "What": "Variable",
     "defdec": "Def",
     "display": "temp",
@@ -11045,7 +10835,7 @@
     "scope": null
   },
   {
-    "ID": "c:spi_driver.c@20400@F@spi_fre_interrupt_handle@temp",
+    "ID": "c:spi_driver.c@20397@F@spi_fre_interrupt_handle@temp",
     "What": "Variable",
     "defdec": "Def",
     "display": "temp",
@@ -11195,188 +10985,6 @@
       "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\drivers\\startup\\startup.c"
     },
     "name": "SystemInit",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@delay",
-    "What": "Function",
-    "defdec": "Def",
-    "display": "void delay(void)",
-    "location": {
-      "column": "6",
-      "line": "18",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
-    },
-    "name": "delay",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
-    "ID": "c:main.c@455@F@delay@i",
-    "What": "Variable",
-    "defdec": "Def",
-    "display": "i",
-    "location": {
-      "column": "17",
-      "line": "20",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
-    },
-    "name": "i",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI2_GPIOInits",
-    "What": "Function",
-    "defdec": "Def",
-    "display": "void SPI2_GPIOInits(void)",
-    "location": {
-      "column": "6",
-      "line": "23",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
-    },
-    "name": "SPI2_GPIOInits",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
-    "ID": "c:main.c@525@F@SPI2_GPIOInits@SPIPins",
-    "What": "Variable",
-    "defdec": "Def",
-    "display": "SPIPins",
-    "location": {
-      "column": "15",
-      "line": "25",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
-    },
-    "name": "SPIPins",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@SPI2_Inits",
-    "What": "Function",
-    "defdec": "Def",
-    "display": "void SPI2_Inits(void)",
-    "location": {
-      "column": "6",
-      "line": "51",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
-    },
-    "name": "SPI2_Inits",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
-    "ID": "c:main.c@1276@F@SPI2_Inits@SPI2handle",
-    "What": "Variable",
-    "defdec": "Def",
-    "display": "SPI2handle",
-    "location": {
-      "column": "14",
-      "line": "53",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
-    },
-    "name": "SPI2handle",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@Button_init",
-    "What": "Function",
-    "defdec": "Def",
-    "display": "void Button_init(void)",
-    "location": {
-      "column": "6",
-      "line": "66",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
-    },
-    "name": "Button_init",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
-    "ID": "c:main.c@1772@F@Button_init@button",
-    "What": "Variable",
-    "defdec": "Def",
-    "display": "button",
-    "location": {
-      "column": "15",
-      "line": "68",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
-    },
-    "name": "button",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@LED_Init",
-    "What": "Function",
-    "defdec": "Def",
-    "display": "void LED_Init(void)",
-    "location": {
-      "column": "6",
-      "line": "79",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
-    },
-    "name": "LED_Init",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
-    "ID": "c:main.c@2103@F@LED_Init@GpioLed",
-    "What": "Variable",
-    "defdec": "Def",
-    "display": "GpioLed",
-    "location": {
-      "column": "15",
-      "line": "81",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
-    },
-    "name": "GpioLed",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
-    "ID": "c:@F@main",
-    "What": "Function",
-    "defdec": "Def",
-    "display": "int main(void)",
-    "location": {
-      "column": "5",
-      "line": "93",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
-    },
-    "name": "main",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
-    "ID": "c:main.c@2504@F@main@data",
-    "What": "Variable",
-    "defdec": "Def",
-    "display": "data",
-    "location": {
-      "column": "13",
-      "line": "95",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
-    },
-    "name": "data",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
-    "ID": "c:main.c@2530@F@main@slaveResponse",
-    "What": "Variable",
-    "defdec": "Def",
-    "display": "slaveResponse",
-    "location": {
-      "column": "13",
-      "line": "96",
-      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
-    },
-    "name": "slaveResponse",
     "origin": "project_file",
     "scope": null
   },
@@ -11770,6 +11378,90 @@
     },
     "name": "strstr",
     "origin": "system_include",
+    "scope": null
+  },
+  {
+    "ID": "c:@F@delay",
+    "What": "Function",
+    "defdec": "Def",
+    "display": "void delay(void)",
+    "location": {
+      "column": "6",
+      "line": "6",
+      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
+    },
+    "name": "delay",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
+    "ID": "c:main.c@103@F@delay@i",
+    "What": "Variable",
+    "defdec": "Def",
+    "display": "i",
+    "location": {
+      "column": "17",
+      "line": "8",
+      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
+    },
+    "name": "i",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
+    "ID": "c:@F@main",
+    "What": "Function",
+    "defdec": "Def",
+    "display": "int main(void)",
+    "location": {
+      "column": "5",
+      "line": "11",
+      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
+    },
+    "name": "main",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
+    "ID": "c:main.c@163@F@main@GpioLed",
+    "What": "Variable",
+    "defdec": "Def",
+    "display": "GpioLed",
+    "location": {
+      "column": "15",
+      "line": "13",
+      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
+    },
+    "name": "GpioLed",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
+    "ID": "c:main.c@187@F@main@button",
+    "What": "Variable",
+    "defdec": "Def",
+    "display": "button",
+    "location": {
+      "column": "15",
+      "line": "14",
+      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
+    },
+    "name": "button",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
+    "ID": "c:@F@EXTI15_10_IRQHandler",
+    "What": "Function",
+    "defdec": "Def",
+    "display": "void EXTI15_10_IRQHandler(void)",
+    "location": {
+      "column": "6",
+      "line": "51",
+      "path": "C:\\Users\\nickh\\Desktop\\embedded\\stm32l476 drivers\\src\\main.c"
+    },
+    "name": "EXTI15_10_IRQHandler",
+    "origin": "project_file",
     "scope": null
   },
   {

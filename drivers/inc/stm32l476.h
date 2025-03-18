@@ -40,6 +40,26 @@ typedef struct
 
 /*********************************************************************/
 
+/********************STRUCTURE FOR I2Cx REGISTERS********************/
+
+typedef struct 
+{
+    volatile uint32_t CR1;
+    volatile uint32_t CR2;
+    volatile uint32_t OAR1;
+    volatile uint32_t OAR2;
+    volatile uint32_t TIMINGR;
+    volatile uint32_t TIMEOUTR;
+    volatile uint32_t ISR;
+    volatile uint32_t ICR;
+    volatile uint32_t PECR;
+    volatile uint32_t RXDR;
+    volatile uint32_t TXDR;
+
+}I2C_RegDef;
+
+/*********************************************************************/
+
 /*********************STRUCTURE FOR RCC REGISTERS*********************/
 
 typedef struct
@@ -250,6 +270,15 @@ typedef struct
 
 /***********************************************************************/
 
+/**********I2C DEFINITIONS BASE ADDRESSES TYPECASTED TO STRUCT**********/
+
+#define I2C1                            ((I2C_RegDef*) I2C1_BASEADDR)                                      
+#define I2C2                            ((I2C_RegDef*) I2C2_BASEADDR)
+#define I2C3                            ((I2C_RegDef*) I2C3_BASEADDR)
+#define I2C4                            ((I2C_RegDef*) I2C3_BASEADDR)  
+
+/***********************************************************************/
+
 /***************CLOCK ENABLE MACROS FOR GPIOx PERIPHERALS***************/
 
 #define GPIOA_PCLK_EN()                 ( RCC->AHB2ENR |= (1<<0) )
@@ -360,9 +389,20 @@ typedef struct
 
 /*******************MACROS TO RESET SPIx PERIPHERALS*******************/
 
-#define SPI1_REG_RESET()               do{ ( RCC->APB2RSTR |= (1<<12) ); ( RCC->APB2RSTR &= ~(1<<12) ); } while(0)
+#define SPI1_REG_RESET()               do{ ( RCC->APB2RSTR |= (1<<12) );  ( RCC->APB2RSTR &= ~(1<<12) );  } while(0)
 #define SPI2_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<14) ); ( RCC->APB1RSTR1 &= ~(1<<14) ); } while(0)
 #define SPI3_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<15) ); ( RCC->APB1RSTR1 &= ~(1<<15) ); } while(0)
+
+/***********************************************************************/
+
+/*******************MACROS TO RESET I2Cx PERIPHERALS*******************/
+
+#define I2C1_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<21) ); ( RCC->APB1RSTR1 &= ~(1<<21) ); } while(0)
+#define I2C2_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<22) ); ( RCC->APB1RSTR1 &= ~(1<<22) ); } while(0)
+#define I2C3_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<23) ); ( RCC->APB1RSTR1 &= ~(1<<23) ); } while(0)
+#define I2C4_REG_RESET()               do{ ( RCC->APB1RSTR2 |= (1<<1) );  ( RCC->APB1RSTR2 &= ~(1<<1) );  } while(0)
+
+/***********************************************************************/
 
 /************PORT CODE MACRO THAT RETURNS GPIOx BASE ADDRESS************/
 

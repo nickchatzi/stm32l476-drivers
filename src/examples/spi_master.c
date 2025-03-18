@@ -122,7 +122,7 @@ int main (void)
         GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_5);
       }
 
-      while (SPI_GetFlagStatus(SPI2,SPI_BUSY_FLAG));
+      while (SPI_GetFlagStatus(SPI2,SPI_FLAG_BUSY));
 
       SPIPeripheralControl(SPI2,DISABLE);
 

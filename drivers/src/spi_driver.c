@@ -125,7 +125,7 @@ void SPI_Init(SPI_Handle *pSPIHandle)
  
  * @fn          -SPI_DeInit
  * 
- * @brief       -This function de-initializes the SPI and resets all the registors of a peripheral.
+ * @brief       -This function de-initializes the SPI and resets all the registers of a peripheral.
  * 
  * @param[in]   -Base address of the SPI port
  * @param[in]   -
@@ -145,18 +145,18 @@ void SPI_DeInit(SPI_RegDef *pSPIx)
     }
     else if (pSPIx == SPI2)
     {
-        SPI1_REG_RESET();
+        SPI2_REG_RESET();
     }
     else if (pSPIx == SPI3)
     {
-        SPI1_REG_RESET();
+        SPI3_REG_RESET();
     }
 }
 /*********************************************************************************/
 
 /*******************************SPI ENABLE**************************************
  
- * @fn          -SPI_Enable
+ * @fn          -SPIPeripheralControl
  * 
  * @brief       -This function will enable the functionality of SPI.
  * 
@@ -677,7 +677,7 @@ static void spi_modf_interrupt_handle(SPI_Handle *pSPIHandle)
 
     pSPIHandle->pSPIx->CR1 |= (1 << SPE) | (1 << MSTR);
 
-    SPI_ApplicationEventCallback(pSPIHandle, SPI_EVENT_MODF_ERR);
+    SPIApplicationEventCallback(pSPIHandle, SPI_EVENT_MODF_ERR);
 }
 
 static void spi_ovr_err_interrupt_handle(SPI_Handle *pSPIHandle)
@@ -693,7 +693,7 @@ static void spi_ovr_err_interrupt_handle(SPI_Handle *pSPIHandle)
     }
     (void) temp;
     /* Inform the application */
-    SPI_ApplicationEventCallback(pSPIHandle, SPI_EVENT_OVR_ERR);
+    SPIApplicationEventCallback(pSPIHandle, SPI_EVENT_OVR_ERR);
 }
 
 static void spi_crcerr_interrupt_handle(SPI_Handle *pSPIHandle)
@@ -702,7 +702,7 @@ static void spi_crcerr_interrupt_handle(SPI_Handle *pSPIHandle)
 
     pSPIHandle->pSPIx->SR = ~(1 << CRCERR);
 
-    SPI_ApplicationEventCallback(pSPIHandle, SPI_EVENT_CRC_ERR);
+    SPIApplicationEventCallback(pSPIHandle, SPI_EVENT_CRC_ERR);
 }
 
 static void spi_fre_interrupt_handle(SPI_Handle *pSPIHandle)
@@ -715,7 +715,7 @@ static void spi_fre_interrupt_handle(SPI_Handle *pSPIHandle)
 
     SPIPeripheralControl(pSPIHandle->pSPIx, DISABLE);
 
-    SPI_ApplicationEventCallback(pSPIHandle, SPI_EVENT_FRE_ERR);
+    SPIApplicationEventCallback(pSPIHandle, SPI_EVENT_FRE_ERR);
 
     SPIPeripheralControl(pSPIHandle->pSPIx, ENABLE);
 }

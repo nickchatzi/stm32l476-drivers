@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V8.40.2.214/W32 for ARM                  10/Mar/2025  21:26:22
+# IAR ELF Linker V8.40.2.214/W32 for ARM                  13/Mar/2025  20:03:11
 # Copyright 2007-2019 IAR Systems AB.
 #
 #    Output file  =
@@ -10,7 +10,7 @@
 #        C:\Users\nickh\Desktop\embedded\stm32l476
 #        drivers\Debug\List\stm32l476_drivers.map
 #    Command line =
-#        -f C:\Users\nickh\AppData\Local\Temp\EWC9BB.tmp
+#        -f C:\Users\nickh\AppData\Local\Temp\EW485E.tmp
 #        ("C:\Users\nickh\Desktop\embedded\stm32l476
 #        drivers\Debug\Obj\gpio_driver.o"
 #        "C:\Users\nickh\Desktop\embedded\stm32l476 drivers\Debug\Obj\main.o"
@@ -77,19 +77,52 @@ No sections matched the following patterns:
   .intvec   ro code   0x800'0000   0x188  startup_stm32l476xx.o [1]
                     - 0x800'0188   0x188
 
-"P1":                              0x998
-  .text     ro code   0x800'0188   0x494  gpio_driver.o [1]
-  .text     ro code   0x800'061c   0x188  spi_driver.o [1]
-  .text     ro code   0x800'07a4   0x17c  main.o [1]
-  .text     ro code   0x800'0920    0x22  fpinit_M.o [3]
-  .text     ro code   0x800'0944    0x1e  cmain.o [4]
-  .text     ro code   0x800'0962     0x4  low_level_init.o [2]
-  .text     ro code   0x800'0966     0x4  exit.o [2]
-  .text     ro code   0x800'096c     0xa  cexit.o [4]
-  .text     ro code   0x800'0978    0x14  exit.o [5]
-  .text     ro code   0x800'098c    0x10  startup.o [1]
-  .text     ro code   0x800'099c    0x10  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'09ac     0xc  cstartup_M.o [4]
+"P1":                              0x910
+  .text     ro code   0x800'0188   0x5e8  gpio_driver.o [1]
+  .text     ro code   0x800'0770    0xc4  main.o [1]
+  .text     ro code   0x800'0834    0x66  ABImemset.o [4]
+  .text     ro code   0x800'089c    0x22  fpinit_M.o [3]
+  .text     ro code   0x800'08c0    0x1e  cmain.o [4]
+  .text     ro code   0x800'08de     0x4  low_level_init.o [2]
+  .text     ro code   0x800'08e2     0x4  exit.o [2]
+  .text     ro code   0x800'08e8     0xa  cexit.o [4]
+  .text     ro code   0x800'08f4    0x14  exit.o [5]
+  .text     ro code   0x800'0908    0x10  startup.o [1]
+  .text     ro code   0x800'0918    0x10  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0928     0xc  cstartup_M.o [4]
+  .text     ro code   0x800'0934     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0938     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'093c     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0940     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0944     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0948     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'094c     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0950     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0954     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0958     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'095c     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0960     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0964     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0968     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'096c     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0970     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0974     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0978     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'097c     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0980     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0984     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0988     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'098c     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0990     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0994     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'0998     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'099c     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'09a0     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'09a4     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'09a8     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'09ac     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'09b0     0x4  startup_stm32l476xx.o [1]
+  .text     ro code   0x800'09b4     0x4  startup_stm32l476xx.o [1]
   .text     ro code   0x800'09b8     0x4  startup_stm32l476xx.o [1]
   .text     ro code   0x800'09bc     0x4  startup_stm32l476xx.o [1]
   .text     ro code   0x800'09c0     0x4  startup_stm32l476xx.o [1]
@@ -146,41 +179,7 @@ No sections matched the following patterns:
   .text     ro code   0x800'0a8c     0x4  startup_stm32l476xx.o [1]
   .text     ro code   0x800'0a90     0x4  startup_stm32l476xx.o [1]
   .text     ro code   0x800'0a94     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0a98     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0a9c     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0aa0     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0aa4     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0aa8     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0aac     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0ab0     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0ab4     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0ab8     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0abc     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0ac0     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0ac4     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0ac8     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0acc     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0ad0     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0ad4     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0ad8     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0adc     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0ae0     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0ae4     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0ae8     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0aec     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0af0     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0af4     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0af8     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0afc     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0b00     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0b04     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0b08     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0b0c     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0b10     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0b14     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0b18     0x4  startup_stm32l476xx.o [1]
-  .text     ro code   0x800'0b1c     0x4  startup_stm32l476xx.o [1]
-                    - 0x800'0b20   0x998
+                    - 0x800'0a98   0x910
 
 "P3":                             0x2000
   CSTACK             0x2000'0000  0x2000  <Block>
@@ -192,7 +191,7 @@ Unused ranges:
          From           To      Size
          ----           --      ----
           0x0          0x0       0x1
-   0x800'0b20   0x80f'ffff  0xf'f4e0
+   0x800'0a98   0x80f'ffff  0xf'f568
   0x2000'2000  0x2001'7fff  0x1'6000
 
 
@@ -208,13 +207,12 @@ command line/config:
     Total:
 
 C:\Users\nickh\Desktop\embedded\stm32l476 drivers\Debug\Obj: [1]
-    gpio_driver.o            1'172
-    main.o                     380
-    spi_driver.o               392
+    gpio_driver.o            1'512
+    main.o                     196
     startup.o                   16
-    startup_stm32l476xx.o      768
+    startup_stm32l476xx.o      764
     ---------------------------------------
-    Total:                   2'728
+    Total:                   2'488
 
 dl7M_tln.a: [2]
     exit.o                       4
@@ -228,21 +226,22 @@ m7M_tls.a: [3]
     Total:                      34
 
 rt7M_tl.a: [4]
+    ABImemset.o                102
     cexit.o                     10
     cmain.o                     30
     cstartup_M.o                12
     ---------------------------------------
-    Total:                      52
+    Total:                     154
 
 shb_l.a: [5]
     exit.o                      20
     ---------------------------------------
     Total:                      20
 
-    Gaps                         6
+    Gaps                         8
     Linker created                    8'192
 -------------------------------------------
-    Grand Total:             2'848    8'192
+    Grand Total:             2'712    8'192
 
 
 *******************************************************************************
@@ -251,39 +250,35 @@ shb_l.a: [5]
 
 Entry                       Address   Size  Type      Object
 -----                       -------   ----  ----      ------
-?main                    0x800'0945         Code  Gb  cmain.o [4]
-Button_init              0x800'0845   0x26  Code  Gb  main.o [1]
+?main                    0x800'08c1         Code  Gb  cmain.o [4]
 CSTACK$$Base            0x2000'0000          --   Gb  - Linker created -
 CSTACK$$Limit           0x2000'2000          --   Gb  - Linker created -
+EXTI15_10_IRQHandler     0x800'081d   0x18  Code  Gb  main.o [1]
+GPIO_IRQHandling         0x800'0701   0x16  Code  Gb  gpio_driver.o [1]
+GPIO_IRQInterruptConfig
+                         0x800'05d3   0xf0  Code  Gb  gpio_driver.o [1]
+GPIO_IRQPriorityConfig   0x800'06c3   0x3e  Code  Gb  gpio_driver.o [1]
 GPIO_Init                0x800'0319  0x2ae  Code  Gb  gpio_driver.o [1]
 GPIO_PeripheralControl   0x800'0189  0x190  Code  Gb  gpio_driver.o [1]
-GPIO_ReadFromInputPin    0x800'05c7   0x10  Code  Gb  gpio_driver.o [1]
-GPIO_ToggleOutputPin     0x800'05d7    0xc  Code  Gb  gpio_driver.o [1]
-LED_Init                 0x800'086b   0x2e  Code  Gb  main.o [1]
+GPIO_ToggleOutputPin     0x800'05c7    0xc  Code  Gb  gpio_driver.o [1]
 Region$$Table$$Base             0x0          --   Gb  - Linker created -
 Region$$Table$$Limit            0x0          --   Gb  - Linker created -
-SPI2_GPIOInits           0x800'07b3   0x56  Code  Gb  main.o [1]
-SPI2_Inits               0x800'0809   0x3c  Code  Gb  main.o [1]
-SPIPeripheralControl     0x800'06f9   0x1c  Code  Gb  spi_driver.o [1]
-SPI_GetFlagStatus        0x800'0731   0x10  Code  Gb  spi_driver.o [1]
-SPI_Init                 0x800'069d   0x5c  Code  Gb  spi_driver.o [1]
-SPI_PeriClockControl     0x800'061d   0x80  Code  Gb  spi_driver.o [1]
-SPI_ReceiveData          0x800'0769   0x28  Code  Gb  spi_driver.o [1]
-SPI_SSOEConfig           0x800'0715   0x1c  Code  Gb  spi_driver.o [1]
-SPI_SendData             0x800'0741   0x28  Code  Gb  spi_driver.o [1]
-SystemInit               0x800'098d   0x10  Code  Gb  startup.o [1]
-__cmain                  0x800'0945         Code  Gb  cmain.o [4]
-__exit                   0x800'0979   0x14  Code  Gb  exit.o [5]
-__iar_init_vfp           0x800'0921         Code  Gb  fpinit_M.o [3]
-__iar_program_start      0x800'09ad         Code  Gb  cstartup_M.o [4]
-__low_level_init         0x800'0963    0x4  Code  Gb  low_level_init.o [2]
+SystemInit               0x800'0909   0x10  Code  Gb  startup.o [1]
+__aeabi_memset           0x800'0835         Code  Gb  ABImemset.o [4]
+__cmain                  0x800'08c1         Code  Gb  cmain.o [4]
+__exit                   0x800'08f5   0x14  Code  Gb  exit.o [5]
+__iar_Memset             0x800'0835         Code  Gb  ABImemset.o [4]
+__iar_Memset_word        0x800'083d         Code  Gb  ABImemset.o [4]
+__iar_init_vfp           0x800'089d         Code  Gb  fpinit_M.o [3]
+__iar_program_start      0x800'0929         Code  Gb  cstartup_M.o [4]
+__low_level_init         0x800'08df    0x4  Code  Gb  low_level_init.o [2]
 __vector_table           0x800'0000         Data  Gb  startup_stm32l476xx.o [1]
-_call_main               0x800'0951         Code  Gb  cmain.o [4]
-_exit                    0x800'096d         Code  Gb  cexit.o [4]
-_main                    0x800'095f         Code  Gb  cmain.o [4]
-delay                    0x800'07a5    0xe  Code  Gb  main.o [1]
-exit                     0x800'0967    0x4  Code  Gb  exit.o [2]
-main                     0x800'0899   0x78  Code  Gb  main.o [1]
+_call_main               0x800'08cd         Code  Gb  cmain.o [4]
+_exit                    0x800'08e9         Code  Gb  cexit.o [4]
+_main                    0x800'08db         Code  Gb  cmain.o [4]
+delay                    0x800'0771    0xe  Code  Gb  main.o [1]
+exit                     0x800'08e3    0x4  Code  Gb  exit.o [2]
+main                     0x800'077f   0x96  Code  Gb  main.o [1]
 
 
 [1] = C:\Users\nickh\Desktop\embedded\stm32l476 drivers\Debug\Obj
@@ -292,7 +287,7 @@ main                     0x800'0899   0x78  Code  Gb  main.o [1]
 [4] = rt7M_tl.a
 [5] = shb_l.a
 
-  2'848 bytes of readonly  code memory
+  2'712 bytes of readonly  code memory
   8'192 bytes of readwrite data memory
 
 Errors: none
