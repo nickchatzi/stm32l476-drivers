@@ -161,6 +161,7 @@ typedef struct
   volatile uint32_t MMFR[4U];               /*!< Offset: 0x050 (R/ )  Memory Model Feature Register */
   volatile uint32_t ISAR[5U];               /*!< Offset: 0x060 (R/ )  Instruction Set Attributes Registervolatile uint32_t RESERVED0[5U]; */
   volatile uint32_t CPACR;                  /*!< Offset: 0x088 (R/W)  Coprocessor Access Control Register */
+
 } SCB_Type;
 
 
@@ -389,7 +390,7 @@ typedef struct
 
 /*******************MACROS TO RESET SPIx PERIPHERALS*******************/
 
-#define SPI1_REG_RESET()               do{ ( RCC->APB2RSTR |= (1<<12) );  ( RCC->APB2RSTR &= ~(1<<12) );  } while(0)
+#define SPI1_REG_RESET()               do{ ( RCC->APB2RSTR |=  (1<<12) ); ( RCC->APB2RSTR &= ~(1<<12) );  } while(0)
 #define SPI2_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<14) ); ( RCC->APB1RSTR1 &= ~(1<<14) ); } while(0)
 #define SPI3_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<15) ); ( RCC->APB1RSTR1 &= ~(1<<15) ); } while(0)
 
@@ -432,6 +433,16 @@ typedef struct
 #define IRQ_NO_SPI1                     35
 #define IRQ_NO_SPI2                     36
 #define IRQ_NO_SPI3                     51
+
+//I2C IRQ NUMBERS
+#define IRQ_NO_I2C1_EV                  31
+#define IRQ_NO_I2C1_ER                  32
+#define IRQ_NO_I2C2_EV                  33
+#define IRQ_NO_I2C2_ER                  34
+#define IRQ_NO_I2C3_EV                  72
+#define IRQ_NO_I2C3_ER                  73
+#define IRQ_NO_I2C4_EV                  83
+#define IRQ_NO_I2C4_ER                  84
 
 /***********************************************************************/
 

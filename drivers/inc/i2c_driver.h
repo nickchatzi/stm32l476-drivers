@@ -25,6 +25,14 @@ typedef struct
 {
     I2C_RegDef  *pI2Cx;         //Holds the base address (x:1,2,3) peripheral
     I2C_Config  I2C_Config;
+    uint8_t     *pTxBuffer;     //To store the application Tx buffer address    
+    uint8_t     *pRxBuffer;     //To store the application Rx buffer address
+    uint32_t    TxLen;          //To store Tx length
+    uint32_t    RxLen;          //To store Rx length
+    uint8_t     TxRxState;      //To store communication state
+    uint8_t     DevAddr;        //To store slave device address
+    uint32_t    RxSize;         //To store Rx size
+    uint8_t     Sr;             //To store repeated start value
 
 }I2C_Handle;
 
@@ -69,6 +77,9 @@ typedef struct
 #define I2C_FM_DUTY_16_9                    ((1 << 28) | (4 << 20) | (2 << 16) | (16 << 8) | 9)
 
 /*********************************************************************/
+
+#define I2C_DISABLE_SR  	RESET
+#define I2C_ENABLE_SR   	SET
 
 /********************CR1 REGISTER BIT DEFINITIONS*********************/
 
@@ -138,19 +149,75 @@ typedef struct
 
 /*********************************************************************/
 
+/********************ICR REGISTER BIT DEFINITIONS*********************/
+
+#define ADDRCF                                3    
+#define NACKCF                                4
+#define STOPCF                                5
+#define BERRCF                                8
+#define ARLOCF                                9
+#define OVRCF                                 10
+#define PECCF                                 11
+#define TIMOUTCF                              12
+#define ALERTCF                               13
+
+/*********************************************************************/
+
+/****************RXDR, TXDR REGISTER BIT DEFINITIONS******************/
+
+#define RXDATA                                0
+#define RTDATA                                0
+
+/*********************************************************************/
+
+/*****************************I2C EVENTS******************************/
+
+#define I2C_EVENT_RX_CMPLT                    1
+#define I2C_EVENT_TX_CMPLT                    2
+#define I2C_EVENT_STOP                        3
+#define I2C_EVENT_TCR                         4
+#define I2C_EVENT_TC                          5
+#define I2C_EVENT_ADDR                        6
+#define I2C_EVENT_NACKF                       7
+
+/*********************************************************************/
+
+/*****************************I2C ERRORS******************************/
+
+#define I2C_EVENT_BERR                        1
+#define I2C_EVENT_ARLO                        2
+#define I2C_EVENT_OVR                         3
+#define I2C_EVENT_PECERR                      4
+#define I2C_EVENT_TIMEOUT                     5
+#define I2C_EVENT_ALERT                       6
+
+/*********************************************************************/
+
 /********************I2C STATUS FLAGS DEFINITIONS*********************/
 
-#define I2C_TXE_FLAG                        ( 1 << TXE)   //status to check if TX buffer is empty or not
-#define I2C_RXNE_FLAG                       ( 1 << RXNE)   //status to check if RX buffer is empty or not
-#define I2C_ADDR_FLAG                       ( 1 << ADDR)
-#define I2C_NACKF_FLAG                      ( 1 << NACKF)
-#define I2C_STOPF_FLAG                      ( 1 << STOPF)
-#define I2C_TC_FLAG                         ( 1 << TC)
-#define I2C_BERR_FLAG                       ( 1 << BERR)
-#define I2C_ARLO_FLAG                       ( 1 << ARLO)
-#define I2C_OVR_FLAG                        ( 1 << OVR)
-#define I2C_TIMEOUT_FLAG                    ( 1 << TIMEOUT)
-#define I2C_BUSY_FLAG                       ( 1 << BUSY)
+#define I2C_FLAG_TXE                        ( 1 << TXE)   //status to check if TX buffer is empty or not
+#define I2C_FLAG_RXNE                       ( 1 << RXNE)   //status to check if RX buffer is empty or not
+#define I2C_FLAG_ADDR                       ( 1 << ADDR)
+#define I2C_FLAG_NACKF                      ( 1 << NACKF)
+#define I2C_FLAG_STOPF                      ( 1 << STOPF)
+#define I2C_FLAG_TC                         ( 1 << TC)
+#define I2C_FLAG_BERR                       ( 1 << BERR)
+#define I2C_FLAG_ARLO                       ( 1 << ARLO)
+#define I2C_FLAG_OVR                        ( 1 << OVR)
+#define I2C_FLAG_TIMEOUT                    ( 1 << TIMEOUT)
+#define I2C_FLAG_BUSY                       ( 1 << BUSY)
+
+/*********************************************************************/
+
+/********************I2C STATUS FLAGS DEFINITIONS*********************/
+
+#define I2C_READY                           0
+#define I2C_BUSY_IN_RX                      1
+#define I2C_BUSY_IN_TX                      2
+
+/*********************************************************************/
+
+
 
 void I2C_PeripheralControl(I2C_RegDef *pI2Cx, uint8_t EnorDi);
 
@@ -166,10 +233,17 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef *pI2Cx , uint32_t FlagName);
 
 //send and receive data
 void I2C_MasterSendData(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_t length, uint8_t slaveAddr);
+void I2C_MasterReceiveData(I2C_Handle *pI2CHandle, uint8_t *pRxBuffer, uint32_t length, uint8_t slaveAddr);
+
+//send and receive data using interrupts
+uint8_t  I2C_MasterSendDataIT(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_t length, uint8_t slaveAddr, uint8_t Sr);
+uint8_t  I2C_MasterReceiveDataIT(I2C_Handle *pI2CHandle, uint8_t *pRxBuffer, uint32_t length, uint8_t slaveAddr, uint8_t Sr);
 
 //IRQ Config and ISR Handling
 void I2C_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi);
 void I2C_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQPriority);
+void I2C_EV_IRQHandling(I2C_Handle *pI2CHandle);
+void I2C_ER_IRQHandling(I2C_Handle *pI2CHandle);
 
 //Application Callback
 void I2CApplicationEventCallback(I2C_Handle *pI2CHandle, uint8_t AppEv);
