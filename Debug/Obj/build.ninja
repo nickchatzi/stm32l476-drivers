@@ -21,10 +21,14 @@ rule browsedata
 
 #Build steps
 build gpio_driver.pbi : index gpio_driver.xcl
+build i2c_driver.pbi : index i2c_driver.xcl
 build spi_driver.pbi : index spi_driver.xcl
 build startup.pbi : index startup.xcl
 build main.pbi : index main.xcl
-build stm32l476_drivers.pbd : link gpio_driver.pbi spi_driver.pbi startup.pbi main.pbi
+build stm32l476_drivers_part0.pbi : link gpio_driver.pbi i2c_driver.pbi
+build stm32l476_drivers_part1.pbi : link spi_driver.pbi startup.pbi
+build stm32l476_drivers_part2.pbi : link main.pbi
+build stm32l476_drivers.pbd : link stm32l476_drivers_part0.pbi stm32l476_drivers_part1.pbi stm32l476_drivers_part2.pbi
 build stm32l476_drivers.pbw : browsedata stm32l476_drivers.pbd
 
 

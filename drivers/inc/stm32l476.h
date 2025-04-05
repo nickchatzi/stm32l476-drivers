@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 /********************STRUCTURE FOR GPIOx REGISTERS********************/
 
@@ -253,7 +254,7 @@ typedef struct
 
 #define RCC                             ((RCC_RegDef*) RCC_BASEADDR)
 
-#define  RCC_CR_MSION                   ((uint32_t) 0x40021000) 
+#define RCC_CR_MSION                   ((uint32_t) 0x40021000) 
 
 #define SCB                             ((SCB_Type *) SCB_BASE) 
 
@@ -443,6 +444,14 @@ typedef struct
 #define IRQ_NO_I2C3_ER                  73
 #define IRQ_NO_I2C4_EV                  83
 #define IRQ_NO_I2C4_ER                  84
+
+//UART/USART IRQ NUMBERS
+#define IRQ_NO_USART1	                37
+#define IRQ_NO_USART2	                38
+#define IRQ_NO_USART3	                39
+#define IRQ_NO_UART4	                52
+#define IRQ_NO_UART5	                53
+#define IRQ_NO_USART6	                71
 
 /***********************************************************************/
 

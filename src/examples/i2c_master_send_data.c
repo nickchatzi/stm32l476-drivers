@@ -79,7 +79,8 @@ void LED_Init()
 
 int main (void)
 {
-    uint8_t receivedData[] = 0;
+
+    uint8_t data[] = "Hello World!";
 
     Button_init();
 
@@ -90,14 +91,16 @@ int main (void)
     I2C_Inits();
 
     I2C_PeripheralControl(I2C1, ENABLE);
-    
+
     while(1)
     {
-        I2C_MasterReceiveData(&I2C1Handle,receivedData,strlen((char*)receivedData),SLAVE_ADDRESS);
-  
-        GPIO_ToggleOutputPin(GPIOD, GPIO_PIN_NO_12);
+        while (GPIO_ReadFromInputPin(GPIOC,GPIO_PIN_NO_13));
 
+        delay(); 
+  
+        I2C_MasterSendData(&I2C1Handle,data,strlen((char*)data),SLAVE_ADDRESS, I2C_DISABLE_SR);
     }
+
 }
 
 

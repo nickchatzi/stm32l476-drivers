@@ -64,14 +64,7 @@ typedef struct
 
 /*********************************************************************/
 
-/******************ACK CONTROL CONFIGURATION MACROS*******************/
-
-#define I2C_ACK_DISABLE                     0
-#define I2C_ACK_ENABLE                      1               
-
-/*********************************************************************/
-
-/*******************DUTY CICLE CONFIGURATION MACROS*******************/
+/*******************DUTY CYCLE CONFIGURATION MACROS*******************/
 
 #define I2C_FM_DUTY_2                       ((1 << 28) | (4 << 20) | (2 << 16) | (16 << 8) | 8)              
 #define I2C_FM_DUTY_16_9                    ((1 << 28) | (4 << 20) | (2 << 16) | (16 << 8) | 9)
@@ -95,7 +88,7 @@ typedef struct
 #define ANFOFF                              12
 #define TXDMAEN                             14
 #define RXDMAEN                             15
-#define SCB                                 16
+#define SCB_I2C                             16
 #define NOSTRETCH                           17
 
 /*********************************************************************/
@@ -116,7 +109,7 @@ typedef struct
 
 /*********************************************************************/
 
-/********************CR2 REGISTER BIT DEFINITIONS*********************/
+/******************TIMINGR REGISTER BIT DEFINITIONS*******************/
 
 #define SCLL                                0    
 #define SCLH                                8
@@ -217,7 +210,8 @@ typedef struct
 
 /*********************************************************************/
 
-
+#define I2C_DISABLE_SR  	RESET	// No Repeated Start: Stop condition will be sent
+#define I2C_ENABLE_SR   	SET		// Repeated Start: No Stop condition will be sent
 
 void I2C_PeripheralControl(I2C_RegDef *pI2Cx, uint8_t EnorDi);
 
@@ -231,9 +225,13 @@ void I2C_DeInit(I2C_RegDef *pI2Cx);
 //Get status from the transmission
 uint8_t I2C_GetFlagStatus(I2C_RegDef *pI2Cx , uint32_t FlagName);
 
-//send and receive data
-void I2C_MasterSendData(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_t length, uint8_t slaveAddr);
-void I2C_MasterReceiveData(I2C_Handle *pI2CHandle, uint8_t *pRxBuffer, uint32_t length, uint8_t slaveAddr);
+//Send data
+void I2C_MasterSendData(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_t length, uint8_t slaveAddr, uint8_t Sr);
+void I2C_MasterReceiveData(I2C_Handle *pI2CHandle, uint8_t *pRxBuffer, uint32_t length, uint8_t slaveAddr, uint8_t Sr);
+
+//Receive data
+void I2C_SlaveSendData(I2C_RegDef *pI2Cx ,uint8_t data);
+uint8_t I2C_SlaveReceiveData(I2C_RegDef *pI2Cx);
 
 //send and receive data using interrupts
 uint8_t  I2C_MasterSendDataIT(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_t length, uint8_t slaveAddr, uint8_t Sr);
@@ -244,6 +242,8 @@ void I2C_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi);
 void I2C_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQPriority);
 void I2C_EV_IRQHandling(I2C_Handle *pI2CHandle);
 void I2C_ER_IRQHandling(I2C_Handle *pI2CHandle);
+
+void setHSIclock(I2C_Handle *pI2CHandle);
 
 //Application Callback
 void I2CApplicationEventCallback(I2C_Handle *pI2CHandle, uint8_t AppEv);

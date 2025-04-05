@@ -2,6 +2,10 @@
 
 static uint32_t timingSettings(I2C_Handle *pI2CHandle);
 
+/*Generate start or stop operation*/
+static void I2C_GenerateStartCondition(I2C_RegDef *pI2Cx);
+static void I2C_GenerateStopCondition(I2C_RegDef *pI2Cx);
+
 /*Help functions for interrupt events*/
 static void i2c_rxne_event_handle(I2C_Handle *pI2CHandle);
 static void i2c_txis_event_handle(I2C_Handle *pI2CHandle);
@@ -98,14 +102,33 @@ void I2C_PeriClockControl(I2C_RegDef *pI2Cx, uint8_t EnorDi)
 }
 /*************************************************************************/
 
-//Init and Deinit
+/********************************Init**************************************
+ 
+ * @fn          -I2C_Init
+ * 
+ * @brief       -This function initializes the I2C communication protocol
+ * 
+ * @param[in]   -Base address of the SPI port
+ * @param[in]   -
+ * @param[in]   -
+ * 
+ * @return      -void
+ * 
+ * @note        -none
+ 
+*/
+
 void I2C_Init(I2C_Handle *pI2CHandle)
 {
     uint32_t tempreg = 0;
 
+    setHSIclock(pI2CHandle);
+
     I2C_PeriClockControl(pI2CHandle->pI2Cx, ENABLE);
 
     pI2CHandle->pI2Cx->TIMINGR = 0x00000000;
+    //pI2CHandle->pI2Cx->TIMINGR = 0x00303D5B;  // Very slow clock (~10 kHz)
+    
 
     //Set the frequency of I2C communication
     tempreg |= timingSettings(pI2CHandle);
@@ -135,7 +158,6 @@ void I2C_Init(I2C_Handle *pI2CHandle)
  
 */
 
-
 void I2C_DeInit(I2C_RegDef *pI2Cx)
 {
     if (pI2Cx == I2C1)
@@ -155,8 +177,9 @@ void I2C_DeInit(I2C_RegDef *pI2Cx)
         I2C4_REG_RESET();
     }
 }
+/*****************************************************************************************/
 
-/*********************************Sent Data****************************************
+/*********************************Master Sent Data****************************************
  
  * @fn          -I2C_MasterSendData
  * 
@@ -173,7 +196,7 @@ void I2C_DeInit(I2C_RegDef *pI2Cx)
  
 */
 
-void I2C_MasterSendData(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_t length, uint8_t slaveAddr)
+void I2C_MasterSendData(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_t length, uint8_t slaveAddr, uint8_t Sr)
 {
     // Ensure that the I2C bus is free before initiating a transfer
     while (pI2CHandle->pI2Cx->ISR & (1 << BUSY));  // Wait until BUSY flag is cleared
@@ -183,9 +206,9 @@ void I2C_MasterSendData(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_t len
     pI2CHandle->pI2Cx->CR2 |= (slaveAddr << 1);  // Set 7-bit slave address (shifted)
     pI2CHandle->pI2Cx->CR2 |= (length << NBYTES);    // Set number of bytes (NBYTES)
     pI2CHandle->pI2Cx->CR2 &= ~(1 << RD_WRN);        // Ensure Read/Write bit = 0 (Write Mode)
+    pI2CHandle->pI2Cx->CR1 |= (1 << TXIE); 
     
-    //  Generate the START condition
-    pI2CHandle->pI2Cx->CR2 |= (1 << START);         // Set START bit
+    I2C_GenerateStartCondition(pI2CHandle->pI2Cx);        // Set START bit
 
     //  Wait for TXIS (TX buffer empty, ready to send)
     while (!(pI2CHandle->pI2Cx->ISR & (1 << TXIS))); // Wait for TXIS flag 
@@ -204,13 +227,15 @@ void I2C_MasterSendData(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_t len
     //  Wait for Transfer Complete (TC) flag
     while (!(pI2CHandle->pI2Cx->ISR & (1 << TC)));  // Wait for TC bit
 
-    //  Generate STOP condition
-    pI2CHandle->pI2Cx->CR2 |= (1 << STOP); // Set STOP bit
+    if( Sr == I2C_DISABLE_SR){
+
+        I2C_GenerateStopCondition(pI2CHandle->pI2Cx); 
+    }
 }
 
-/*************************************************************************************/
+/********************************************************************************************/
 
-/*********************************Receive Data****************************************
+/*********************************Master Receive Data****************************************
  
  * @fn          -I2C_MasterReceiveData
  * 
@@ -227,7 +252,7 @@ void I2C_MasterSendData(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_t len
  
 */
 
-void I2C_MasterReceiveData(I2C_Handle *pI2CHandle, uint8_t *pRxBuffer, uint32_t length, uint8_t slaveAddr)
+void I2C_MasterReceiveData(I2C_Handle *pI2CHandle, uint8_t *pRxBuffer, uint32_t length, uint8_t slaveAddr, uint8_t Sr)
 {
     // Clear previous slave address and set new one in CR2
     pI2CHandle->pI2Cx->CR2 &= ~(0x3FF);          // Clear previous address
@@ -239,8 +264,7 @@ void I2C_MasterReceiveData(I2C_Handle *pI2CHandle, uint8_t *pRxBuffer, uint32_t 
     // Set Read mode (bit 10 in CR2)
     pI2CHandle->pI2Cx->CR2 |= (1 << RD_WRN);   // RD_WRN = 1 (Read mode)
 
-    // Generate START condition
-    pI2CHandle->pI2Cx->CR2 |= (1 << START);  
+    I2C_GenerateStartCondition(pI2CHandle->pI2Cx);   
 
     // Wait until RXNE (Receive Buffer Not Empty) flag is set
     for (uint32_t i = 0; i < length; i++)
@@ -251,8 +275,10 @@ void I2C_MasterReceiveData(I2C_Handle *pI2CHandle, uint8_t *pRxBuffer, uint32_t 
         pRxBuffer[i] = pI2CHandle->pI2Cx->RXDR;
     }
 
-    // Generate STOP condition after receiving last byte
-    pI2CHandle->pI2Cx->CR2 |= (1 << STOP); 
+    if( Sr == I2C_DISABLE_SR){
+
+        I2C_GenerateStopCondition(pI2CHandle->pI2Cx); 
+    }
 
     // Wait until STOP flag is set
     while (pI2CHandle->pI2Cx->ISR & (1 << STOPF));
@@ -322,7 +348,7 @@ uint8_t I2C_MasterSendDataIT(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_
  
 */
 
-uint8_t  I2C_MasterReceiveDataIT(I2C_Handle *pI2CHandle, uint8_t *pRxBuffer, uint32_t length, uint8_t slaveAddr, uint8_t Sr)
+uint8_t I2C_MasterReceiveDataIT(I2C_Handle *pI2CHandle, uint8_t *pRxBuffer, uint32_t length, uint8_t slaveAddr, uint8_t Sr)
 {
     uint8_t busystate = pI2CHandle->TxRxState;
 
@@ -345,9 +371,63 @@ uint8_t  I2C_MasterReceiveDataIT(I2C_Handle *pI2CHandle, uint8_t *pRxBuffer, uin
 
     return busystate;
 }
-/************************************************************************************/
 
-/*******************************Get Flag Status**************************************
+/***************************************************************************************/
+
+/*********************************Slave Sent Data****************************************
+ 
+ * @fn          -I2C_SlaveSendData
+ * 
+ * @brief       -This function sents data to the master.
+ * 
+ * @param[in]   -Base address of the I2C peripheral
+ * @param[in]   -Pointer to the data
+ * @param[in]   -
+ * @param[in]   -
+ * 
+ * @return      -void
+ * 
+ * @note        -none
+ 
+*/
+void I2C_SlaveSendData(I2C_RegDef *pI2Cx , uint8_t data)
+{
+    // Wait until TXIS (Transmit Interrupt Status) flag is set
+    while (!(pI2Cx->ISR & (1 << TXIS)));
+
+    //Then send the data
+    pI2Cx->TXDR = data;
+}
+/******************************************************************************************/
+
+/*********************************Slave Receive Data****************************************
+ 
+ * @fn          -I2C_SlaveReceiveData
+ * 
+ * @brief       -This function receives data from master.
+ * 
+ * @param[in]   -Base address of the I2C peripheral
+ * @param[in]   -
+ * @param[in]   -
+ * @param[in]   -
+ * 
+ * @return      -void
+ * 
+ * @note        -none
+ 
+*/
+
+uint8_t I2C_SlaveReceiveData(I2C_RegDef *pI2Cx)
+{
+    // Wait until RXNE (Receive Buffer Not Empty) flag is set
+    while (!(pI2Cx->ISR & (1 << RXNE)));
+
+    //Then receive and return the data
+    return (uint8_t) pI2Cx->RXDR;
+}
+/*******************************************************************************************/
+
+/************************************Get Flag Status*****************************************
  
  * @fn          -I2C_GetFlagStatus
  * 
@@ -617,6 +697,18 @@ void I2C_ER_IRQHandling(I2C_Handle *pI2CHandle)
 }
 /*************************************************************************/
 
+static void I2C_GenerateStartCondition(I2C_RegDef *pI2Cx)
+{
+	//  Generate the START condition
+    pI2Cx->CR2 |= ( 1 << START);
+}
+
+static void I2C_GenerateStopCondition(I2C_RegDef *pI2Cx)
+{
+    // Generate STOP condition after receiving last byte
+    pI2Cx->CR2 |= (1 << STOP); 
+}
+
 static uint32_t timingSettings(I2C_Handle *pI2CHandle)
 {
     uint32_t temp = 0;
@@ -636,8 +728,8 @@ static uint32_t timingSettings(I2C_Handle *pI2CHandle)
         }
         else if(pI2CHandle->I2C_Config.I2C_Freq == I2C_BUS_100KHZ)
         {
-            temp |= ( 0x13 << SCLL );
-            temp |= ( 0x0F << SCLH );
+            temp |= ( 0x14 << SCLL );
+            temp |= ( 0x10 << SCLH );
             temp |= ( 0x02 << SDADEL );
             temp |= ( 0x04 << SCLDEL );
             //temp |= ( 0x00 << RES );
@@ -645,7 +737,7 @@ static uint32_t timingSettings(I2C_Handle *pI2CHandle)
         }
         else
         {
-            fprintf(stderr, "Error: Wrong frequency selection, in relation to the mode selection!\n");
+            printf("Error: Wrong frequency selection, in relation to the mode selection!\n");
         }
     }
     else if(pI2CHandle->I2C_Config.I2C_Mode == I2C_SCL_SPEED_FM)
@@ -672,7 +764,7 @@ static uint32_t timingSettings(I2C_Handle *pI2CHandle)
         }
         else
         {
-            fprintf(stderr, "Error: Wrong frequency selection, in relation to the mode selection!\n");
+            printf("Error: Wrong frequency selection, in relation to the mode selection!\n");
         }
     }
     else if(pI2CHandle->I2C_Config.I2C_Mode == I2C_SCL_SPEED_FMP)
@@ -690,7 +782,7 @@ static uint32_t timingSettings(I2C_Handle *pI2CHandle)
         }
         else
         {
-            fprintf(stderr, "Error: Wrong frequency selection, in relation to the mode selection!\n");
+            printf("Error: Wrong frequency selection, in relation to the mode selection!\n");
         }
     }
 
@@ -719,7 +811,7 @@ static void i2c_rxne_event_handle(I2C_Handle *pI2CHandle)
         // If automatic STOP condition is needed, generate STOP
         if (pI2CHandle->Sr == I2C_DISABLE_SR)
         {
-            pI2CHandle->pI2Cx->CR2 |= STOP;
+            I2C_GenerateStopCondition(pI2CHandle->pI2Cx); 
         }
 
         // Reset the I2C state
@@ -748,7 +840,7 @@ static void i2c_txis_event_handle(I2C_Handle *pI2CHandle)
         // If automatic STOP condition is needed, generate STOP
         if (pI2CHandle->Sr == I2C_DISABLE_SR)
         {
-            pI2CHandle->pI2Cx->CR2 |= STOP;
+            I2C_GenerateStopCondition(pI2CHandle->pI2Cx); 
         }
 
         // Reset the I2C state
@@ -805,7 +897,7 @@ static void i2c_tc_event_handle(I2C_Handle *pI2CHandle)
     // If Repeated Start is disabled, generate STOP condition
     if (pI2CHandle->Sr == I2C_DISABLE_SR)
     {
-        pI2CHandle->pI2Cx->CR2 |= STOP;  // Generate STOP
+        I2C_GenerateStopCondition(pI2CHandle->pI2Cx); 
     }
 
     // Reset I2C state to READY
@@ -906,6 +998,22 @@ static void i2c_alert_event_handle(I2C_Handle *pI2CHandle)
     I2CApplicationEventCallback(pI2CHandle, I2C_EVENT_ALERT);
 }
 /***********************************************************************************/
+
+static void setHSIclock(I2C_Handle *pI2CHandle)
+{
+// 1. Enable HSI clock
+RCC->CR |= (1 << 8);  // Set HSION bit
+
+// 2. Wait for HSI to be ready
+while (!(RCC->CR & (1 << 10)));  // Wait for HSIRDY to be set
+
+// 3. Select HSI as system clock
+RCC->CFGR |= (1 << 0);  // Set SW to 01 (HSI selected)
+
+// 4. Wait until the switch is complete
+while ((RCC->CFGR & (3 << 2)) != (1 << 2));  // Wait until SWS = 01 (HSI is used)
+
+}
 
 void I2CApplicationEventCallback(I2C_Handle *pI2CHandle, uint8_t AppEv)
 {
