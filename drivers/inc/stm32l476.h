@@ -61,6 +61,26 @@ typedef struct
 
 /*********************************************************************/
 
+/********************STRUCTURE FOR USARTx REGISTERS********************/
+
+typedef struct 
+{
+    volatile uint32_t CR1;
+    volatile uint32_t CR2;
+    volatile uint32_t CR3;
+    volatile uint32_t BRR;
+    volatile uint32_t GTPR;
+    volatile uint32_t RTOR;
+    volatile uint32_t RQR;
+    volatile uint32_t ISR;
+    volatile uint32_t ICR;
+    volatile uint32_t RDR;
+    volatile uint32_t TDR;
+
+}USART_RegDef;
+
+/*********************************************************************/
+
 /*********************STRUCTURE FOR RCC REGISTERS*********************/
 
 typedef struct
@@ -281,6 +301,16 @@ typedef struct
 
 /***********************************************************************/
 
+/**********USART DEFINITIONS BASE ADDRESSES TYPECASTED TO STRUCT**********/
+
+#define USART1                            ((USART_RegDef*) USART1_BASEADDR)                                      
+#define USART2                            ((USART_RegDef*) USART2_BASEADDR)
+#define USART3                            ((USART_RegDef*) USART3_BASEADDR)
+#define UART4                             ((USART_RegDef*) UART4_BASEADDR) 
+#define UART5                             ((USART_RegDef*) UART5_BASEADDR)   
+
+/***********************************************************************/
+
 /***************CLOCK ENABLE MACROS FOR GPIOx PERIPHERALS***************/
 
 #define GPIOA_PCLK_EN()                 ( RCC->AHB2ENR |= (1<<0) )
@@ -342,20 +372,20 @@ typedef struct
 
 /***********************************************************************/
 
+/***************CLOCK DISABLE MACROS FOR SPIx PERIPHERALS***************/
+
+#define SPI1_PCLK_DIS()                  ( RCC->APB2ENR  &= ~(1<<12) )
+#define SPI2_PCLK_DIS()                  ( RCC->APB1ENR1 &= ~(1<<14) )
+#define SPI3_PCLK_DIS()                  ( RCC->APB1ENR1 &= ~(1<<15) )
+
+/***********************************************************************/
+
 /***************CLOCK DISABLE MACROS FOR I2Cx PERIPHERALS***************/
 
 #define I2C1_PCLK_DIS()                  ( RCC->APB1ENR1 &= ~(1<<21) )
 #define I2C2_PCLK_DIS()                  ( RCC->APB1ENR1 &= ~(1<<22) )
 #define I2C3_PCLK_DIS()                  ( RCC->APB1ENR1 &= ~(1<<23) )
 #define I2C4_PCLK_DIS()                  ( RCC->APB1ENR2 &= ~(1<<1)  )
-
-/***********************************************************************/
-
-/***************CLOCK DISABLE MACROS FOR SPIx PERIPHERALS***************/
-
-#define SPI1_PCLK_DIS()                  ( RCC->APB2ENR  &= ~(1<<12) )
-#define SPI2_PCLK_DIS()                  ( RCC->APB1ENR1 &= ~(1<<14) )
-#define SPI3_PCLK_DIS()                  ( RCC->APB1ENR1 &= ~(1<<15) )
 
 /***********************************************************************/
 
@@ -403,6 +433,16 @@ typedef struct
 #define I2C2_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<22) ); ( RCC->APB1RSTR1 &= ~(1<<22) ); } while(0)
 #define I2C3_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<23) ); ( RCC->APB1RSTR1 &= ~(1<<23) ); } while(0)
 #define I2C4_REG_RESET()               do{ ( RCC->APB1RSTR2 |= (1<<1) );  ( RCC->APB1RSTR2 &= ~(1<<1) );  } while(0)
+
+/***********************************************************************/
+
+/*******************MACROS TO RESET USARTx PERIPHERALS*******************/
+
+#define USART1_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<14) ); ( RCC->APB1RSTR1 &= ~(1<<14) ); } while(0)
+#define USART2_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<17) ); ( RCC->APB1RSTR1 &= ~(1<<17) ); } while(0)
+#define USART3_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<18) ); ( RCC->APB1RSTR1 &= ~(1<<18) ); } while(0)
+#define UART4_REG_RESET()                do{ ( RCC->APB1RSTR2 |= (1<<19) ); ( RCC->APB1RSTR2 &= ~(1<<19) ); } while(0)
+#define UART5_REG_RESET()                do{ ( RCC->APB1RSTR2 |= (1<<20) ); ( RCC->APB1RSTR2 &= ~(1<<20) ); } while(0)
 
 /***********************************************************************/
 

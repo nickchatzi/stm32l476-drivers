@@ -1,4 +1,5 @@
 #include "i2c_driver.h"
+#include "rcc_driver.h"
 
 static uint32_t timingSettings(I2C_Handle *pI2CHandle);
 
@@ -127,8 +128,6 @@ void I2C_Init(I2C_Handle *pI2CHandle)
     I2C_PeriClockControl(pI2CHandle->pI2Cx, ENABLE);
 
     pI2CHandle->pI2Cx->TIMINGR = 0x00000000;
-    //pI2CHandle->pI2Cx->TIMINGR = 0x00303D5B;  // Very slow clock (~10 kHz)
-    
 
     //Set the frequency of I2C communication
     tempreg |= timingSettings(pI2CHandle);
@@ -998,22 +997,6 @@ static void i2c_alert_event_handle(I2C_Handle *pI2CHandle)
     I2CApplicationEventCallback(pI2CHandle, I2C_EVENT_ALERT);
 }
 /***********************************************************************************/
-
-static void setHSIclock(I2C_Handle *pI2CHandle)
-{
-// 1. Enable HSI clock
-RCC->CR |= (1 << 8);  // Set HSION bit
-
-// 2. Wait for HSI to be ready
-while (!(RCC->CR & (1 << 10)));  // Wait for HSIRDY to be set
-
-// 3. Select HSI as system clock
-RCC->CFGR |= (1 << 0);  // Set SW to 01 (HSI selected)
-
-// 4. Wait until the switch is complete
-while ((RCC->CFGR & (3 << 2)) != (1 << 2));  // Wait until SWS = 01 (HSI is used)
-
-}
 
 void I2CApplicationEventCallback(I2C_Handle *pI2CHandle, uint8_t AppEv)
 {

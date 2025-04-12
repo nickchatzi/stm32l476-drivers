@@ -56,23 +56,12 @@ typedef struct
 
 /*********************************************************************/
 
-/**********************SPEED CONFIFURATION MACROS**********************
-
-#define I2C_SCL_SPEED_SM                    100000
-#define I2C_SCL_SPEED_FM2K                  200000
-#define I2C_SCL_SPEED_FM4K                  400000
-
-/*********************************************************************/
-
-/*******************DUTY CYCLE CONFIGURATION MACROS*******************/
-
-#define I2C_FM_DUTY_2                       ((1 << 28) | (4 << 20) | (2 << 16) | (16 << 8) | 8)              
-#define I2C_FM_DUTY_16_9                    ((1 << 28) | (4 << 20) | (2 << 16) | (16 << 8) | 9)
-
-/*********************************************************************/
+/************************SR CONFIFURATION MACROS**********************/
 
 #define I2C_DISABLE_SR  	RESET
 #define I2C_ENABLE_SR   	SET
+
+/*********************************************************************/
 
 /********************CR1 REGISTER BIT DEFINITIONS*********************/
 
@@ -213,6 +202,7 @@ typedef struct
 #define I2C_DISABLE_SR  	RESET	// No Repeated Start: Stop condition will be sent
 #define I2C_ENABLE_SR   	SET		// Repeated Start: No Stop condition will be sent
 
+//Enable or Disable Peripheral
 void I2C_PeripheralControl(I2C_RegDef *pI2Cx, uint8_t EnorDi);
 
 //Peripheral Clock Setup
@@ -242,8 +232,6 @@ void I2C_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi);
 void I2C_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQPriority);
 void I2C_EV_IRQHandling(I2C_Handle *pI2CHandle);
 void I2C_ER_IRQHandling(I2C_Handle *pI2CHandle);
-
-void setHSIclock(I2C_Handle *pI2CHandle);
 
 //Application Callback
 void I2CApplicationEventCallback(I2C_Handle *pI2CHandle, uint8_t AppEv);

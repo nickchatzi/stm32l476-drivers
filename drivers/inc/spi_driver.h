@@ -173,6 +173,7 @@ typedef struct
 
 /*********************************************************************/
 
+//Enable or Disable Peripheral
 void SPIPeripheralControl(SPI_RegDef *pSPIx, uint8_t EnorDi);
 
 //Peripheral Clock Setup
