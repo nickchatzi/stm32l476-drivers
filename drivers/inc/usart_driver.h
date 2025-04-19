@@ -10,6 +10,7 @@ typedef struct
     uint8_t USART_Mode;
     uint32_t USART_Baud;
     uint8_t USART_NoOfStopBits;
+    uint8_t USART_Oversampling;
     uint8_t USART_WordLength;
     uint8_t USART_ParityControl;
     uint8_t USART_HWFlowControl;
@@ -64,6 +65,14 @@ typedef struct
 #define USART_PARITY_DISABLE                0
 #define USART_PARITY_EN_EVEN                1
 #define USART_PARITY_EN_ODD                 2
+
+
+/*********************************************************************/
+
+/**********************USART OVERSAMPLING MACROS**********************/
+
+#define USART_OVER16                        0
+#define USART_OVER8                         1
 
 
 /*********************************************************************/
@@ -182,6 +191,24 @@ typedef struct
 
 /*********************************************************************/
 
+/********************ICR REGISTER BIT DEFINITIONS*********************/
+
+#define PECF                                 0     
+#define FECF                                 1
+#define NCF                                  2
+#define ORECF                                3
+#define IDLECF                               4
+#define TCCF                                 6
+#define TCBGTCF                              7
+#define LBDCF                                8
+#define CTSCF                                9
+#define RTOCF                                11
+#define EOBCF                                12
+#define CMCF                                 17
+#define WUCF                                 20
+
+/*********************************************************************/
+
 /********************USART STATUS FLAGS DEFINITIONS*********************/
 
 #define USART_FLAG_TXE                        ( 1 << TXE)   //status to check if TX buffer is empty or not
@@ -198,8 +225,10 @@ typedef struct
 #define	USART_EVENT_CTS                       3
 #define	USART_EVENT_PE                        4
 #define	USART_ERR_FE     	                  5
-#define	USART_ERR_NE    	                  6
+#define	USART_ERR_NF    	                  6
 #define	USART_ERR_ORE    	                  7
+#define USART_ERR_PE                          8
+#define USART_ERR_CMF                         9
 
 /*********************************************************************/
 

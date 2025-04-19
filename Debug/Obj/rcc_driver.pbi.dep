@@ -1,7 +1,8 @@
-startup.pbi: \
-  C:\Users\nickh\Desktop\embedded\stm32l476\ drivers\drivers\startup\startup.c \
+rcc_driver.pbi: \
+  C:\Users\nickh\Desktop\embedded\stm32l476\ drivers\drivers\src\rcc_driver.c \
   C:\Users\nickh\Desktop\embedded\stm32l476\ drivers\drivers\startup\startup_stm32l476xx.s \
-  C:\Users\nickh\Desktop\embedded\stm32l476\ drivers\drivers\inc\stm32l476.h \
+  C:\Users\nickh\Desktop\embedded\stm32l476\ drivers\drivers\inc\rcc_driver.h \
+  C:\Users\nickh\Desktop\embedded\stm32l476\ drivers\drivers\inc/stm32l476.h \
   C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stdint.h \
   C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\ycheck.h \
   C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\yvals.h \

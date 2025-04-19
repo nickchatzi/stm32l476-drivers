@@ -1,53 +1,52 @@
-/*
-
-*/
 
 #include "gpio_driver.h"
-#include "i2c_driver.h"
+#include "usart_driver.h"
 #include <string.h>
 
 /*
-PB6 -> I2C_SCL
-PB9 -> I2X SDA
+PA2 -> TX
+PA3 -> RX
 */
-#define MY_ADDRESS  0X61
-#define SLAVE_ADDRESS   0X30
-I2C_Handle I2C1Handle;
+
+USART_Handle USART2Handle;
 
 void delay(void)
 {
   for (uint32_t i = 0; i<250000; i++);
 }
 
-void I2C1_GPIOInits(void)
+void USART_GPIOInits(void)
 {
-  GPIO_Handle I2CPins;
+  GPIO_Handle USARTPins;
   
-  I2CPins.pGpiox = GPIOB;
-  I2CPins.Gpio_PinConfig.GPIO_PinMode = GPIO_MODE_ALTFN;
-  I2CPins.Gpio_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_OD;
-  I2CPins.Gpio_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PU;
-  I2CPins.Gpio_PinConfig.GPIO_PinAltFunMode = 4;
-  I2CPins.Gpio_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+  USARTPins.pGpiox = GPIOA;
+  USARTPins.Gpio_PinConfig.GPIO_PinMode = GPIO_MODE_ALTFN;
+  USARTPins.Gpio_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+  USARTPins.Gpio_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
+  USARTPins.Gpio_PinConfig.GPIO_PinAltFunMode = 7;
+  USARTPins.Gpio_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 
-  //SCL
-  I2CPins.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_6;
-  GPIO_Init(&I2CPins);
+  //TX
+  USARTPins.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_9;
+  GPIO_Init(&USARTPins);
 
-  //SDA
-  I2CPins.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_9;
-  GPIO_Init(&I2CPins);
+  //RX
+  USARTPins.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_10;
+  GPIO_Init(&USARTPins);
 }
 
-void I2C_Inits(void)
+void USART_Inits(void)
 {
-I2C1Handle.pI2Cx = I2C1;
-//I2C1Handle.I2C_Config.I2C_ACKControl = I2C_ACK_ENABLE;
-I2C1Handle.I2C_Config.I2C_DeviceAddress = MY_ADDRESS;
-I2C1Handle.I2C_Config.I2C_Freq = I2C_BUS_100KHZ;
-I2C1Handle.I2C_Config.I2C_Mode = I2C_SCL_SPEED_SM;
+USART2Handle.pUSARTx = USART1;
+USART2Handle.USART_Config.USART_Baud = USART_STD_BAUD_115200;
+USART2Handle.USART_Config.USART_HWFlowControl = USART_HW_FLOW_CTRL_NONE;
+USART2Handle.USART_Config.USART_Mode = USART_MODE_TXRX;
+//USART2Handle.USART_Config.USART_Oversampling = USART_OVER8;
+USART2Handle.USART_Config.USART_NoOfStopBits = USART_STOPBITS_1;
+USART2Handle.USART_Config.USART_ParityControl = USART_PARITY_DISABLE;
+USART2Handle.USART_Config.USART_WordLength = USART_WORDLEN_8BITS;
 
-I2C_Init(&I2C1Handle);
+USART_Init(&USART2Handle);
 }
 
 void Button_init(void)
@@ -79,33 +78,36 @@ void LED_Init()
 
 int main (void)
 {
+    uint8_t receivedData = 0;
 
-    uint8_t data[] = "Hello World";
+    uint8_t Data = 0x60;
 
     Button_init();
 
     LED_Init();
 
-    I2C1_GPIOInits();
+    USART_GPIOInits();
 
-    I2C_Inits();
+    USART_Inits();
 
-    I2C_PeripheralControl(I2C1, ENABLE);
+    USART_PeripheralControl(USART1, ENABLE);
 
+    delay();
 
-
-
+    USART_SendData(&USART2Handle, &Data, sizeof(Data));
+  
     while(1)
     {
-        while (GPIO_ReadFromInputPin(GPIOC,GPIO_PIN_NO_13));
+      
+      USART_ReceiveData(&USART2Handle, &receivedData, sizeof(receivedData));
 
-        delay(); 
+      delay();
 
-        I2C_MasterSendData(&I2C1Handle,data,strlen((char*)data),SLAVE_ADDRESS, I2C_ENABLE_SR);
-  
-        //I2C_MasterSendData(&I2C1Handle,&data,sizeof(data),SLAVE_ADDRESS, I2C_ENABLE_SR);
-    }
+      if (receivedData == 0x20)
+      {
+        GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_5);
 
+        delay();
+      }
+    } 
 }
-
-

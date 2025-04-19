@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <math.h>
 
 /********************STRUCTURE FOR GPIOx REGISTERS********************/
 

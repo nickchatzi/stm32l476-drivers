@@ -123,7 +123,7 @@ void I2C_Init(I2C_Handle *pI2CHandle)
 {
     uint32_t tempreg = 0;
 
-    setHSIclock(pI2CHandle);
+    setHSIclock();
 
     I2C_PeriClockControl(pI2CHandle->pI2Cx, ENABLE);
 

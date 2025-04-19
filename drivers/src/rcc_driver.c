@@ -1,5 +1,9 @@
 #include "rcc_driver.h"
 
+uint16_t AHB_PreScaler[8] = {2,4,8,16,64,128,256,512};
+uint8_t APB1_PreScaler[4] = {2,4,8,16};
+uint8_t APB2_PreScaler[4] = {2,4,8,16};
+
 uint8_t RCC_GetPLLOutputClock()
 {
 	return 0;
@@ -114,7 +118,7 @@ uint32_t RCC_GetPCLK2Value(void)
 	return pclk1;
 }
 
-void setHSIclock(RCC_RegDef *pRCC)
+void setHSIclock()
 {
 // 1. Enable HSI clock
 RCC->CR |= (1 << 8);  // Set HSION bit

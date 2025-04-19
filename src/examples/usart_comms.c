@@ -2,6 +2,7 @@
 #include "gpio_driver.h"
 #include "usart_driver.h"
 #include <string.h>
+#include <stdbool.h>
 
 /*
 PA2 -> TX
@@ -52,8 +53,8 @@ void Button_init(void)
 {
   GPIO_Handle button;
 
-  button.pGpiox = GPIOA;
-  button.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_0;
+  button.pGpiox = GPIOC;
+  button.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_13;
   button.Gpio_PinConfig.GPIO_PinMode = GPIO_MODE_IN;
   button.Gpio_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
   button.Gpio_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PU;
@@ -79,6 +80,10 @@ int main (void)
 {
     uint8_t receivedData = 0;
 
+    uint8_t Data = 0x20;
+
+    bool dataIsReceived = USART_GetFlagStatus(USART2, USART_FLAG_TC);
+
     Button_init();
 
     LED_Init();
@@ -92,5 +97,16 @@ int main (void)
     while(1)
     {
       USART_ReceiveData(&USART2Handle, &receivedData, sizeof(receivedData));
+
+      delay();
+
+      if (dataIsReceived)
+      {
+        GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_5);
+
+        USART_SendData(&USART2Handle, &Data, sizeof(Data));
+
+        delay();
+      }
     }
 }

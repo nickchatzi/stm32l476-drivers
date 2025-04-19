@@ -58,8 +58,8 @@ typedef struct
 
 /************************SR CONFIFURATION MACROS**********************/
 
-#define I2C_DISABLE_SR  	RESET
-#define I2C_ENABLE_SR   	SET
+#define I2C_DISABLE_SR  	                RESET
+#define I2C_ENABLE_SR   	                SET
 
 /*********************************************************************/
 
@@ -177,18 +177,17 @@ typedef struct
 
 /********************I2C STATUS FLAGS DEFINITIONS*********************/
 
-#define I2C_FLAG_TXE                        ( 1 << TXE)   //status to check if TX buffer is empty or not
-#define I2C_FLAG_RXNE                       ( 1 << RXNE)   //status to check if RX buffer is empty or not
-#define I2C_FLAG_ADDR                       ( 1 << ADDR)
-#define I2C_FLAG_NACKF                      ( 1 << NACKF)
-#define I2C_FLAG_STOPF                      ( 1 << STOPF)
-#define I2C_FLAG_TC                         ( 1 << TC)
-#define I2C_FLAG_BERR                       ( 1 << BERR)
-#define I2C_FLAG_ARLO                       ( 1 << ARLO)
-#define I2C_FLAG_OVR                        ( 1 << OVR)
-#define I2C_FLAG_TIMEOUT                    ( 1 << TIMEOUT)
-#define I2C_FLAG_BUSY                       ( 1 << BUSY)
-
+#define I2C_FLAG_TXE                        ( 1 << TXE)     //status to check if TX buffer is empty or not.
+#define I2C_FLAG_RXNE                       ( 1 << RXNE)    //status to check if RX buffer is empty or not.
+#define I2C_FLAG_ADDR                       ( 1 << ADDR)    //status to check if the received slave address matched with one of the enabled slave addresses.
+#define I2C_FLAG_NACKF                      ( 1 << NACKF)   //status to check if a NACK is received after a byte transmission.
+#define I2C_FLAG_STOPF                      ( 1 << STOPF)   //status to check if a STOP condition is detected on the bus.
+#define I2C_FLAG_TC                         ( 1 << TC)      //status to check if transfer is completed.
+#define I2C_FLAG_BERR                       ( 1 << BERR)    //status to check when a misplaced START or STOP condition is detected.
+#define I2C_FLAG_ARLO                       ( 1 << ARLO)    //status to check in case of arbitration loss.
+#define I2C_FLAG_OVR                        ( 1 << OVR)     //status to check when an overrun/underrun error occurs. (ONLY for slave mode with NOSTRETCH = 1).
+#define I2C_FLAG_TIMEOUT                    ( 1 << TIMEOUT) //status to check when a timeout or extended clock timeout occurred.
+#define I2C_FLAG_BUSY                       ( 1 << BUSY)    //status to check that a communication is in progress on the bus (bus is busy)
 /*********************************************************************/
 
 /********************I2C STATUS FLAGS DEFINITIONS*********************/
