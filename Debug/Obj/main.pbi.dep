@@ -17,5 +17,7 @@ main.pbi: C:\Users\nickh\Desktop\embedded\stm32l476\ drivers\src\main.c \
   C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\math.h \
   C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_float_setup.h \
   C:\Users\nickh\Desktop\embedded\stm32l476\ drivers\drivers\inc\usart_driver.h \
+  C:\Users\nickh\Desktop\embedded\stm32l476\ drivers\drivers\inc/rcc_driver.h \
+  C:\Users\nickh\Desktop\embedded\stm32l476\ drivers\drivers\inc\rcc_driver.h \
   C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\string.h \
   C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Product_string.h

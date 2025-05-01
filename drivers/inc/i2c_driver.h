@@ -10,9 +10,7 @@ typedef struct
 {
     uint8_t I2C_Freq;
     uint8_t I2C_Mode;
-    uint32_t I2C_SCLSpeed;
     uint8_t I2C_DeviceAddress;
-    uint8_t I2C_ACKControl;
     uint8_t I2C_FMDutyCycle;
 
 }I2C_Config;
@@ -48,7 +46,7 @@ typedef struct
 
 /*********************************************************************/
 
-/**********************SPEED CONFIFURATION MACROS**********************/
+/**********************MODE CONFIFURATION MACROS**********************/
 
 #define I2C_SCL_SPEED_SM                    0
 #define I2C_SCL_SPEED_FM                    1

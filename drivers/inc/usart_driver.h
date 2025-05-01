@@ -2,6 +2,7 @@
 #define USART_DRIVER_H_
 
 #include "stm32l476.h"
+#include "rcc_driver.h"
 
 /****************STRUCTURE FOR USARTx PIN CONFIGURATION****************/
 
@@ -31,7 +32,8 @@ typedef struct
 	uint32_t RxLen;
 	uint8_t TxBusyState;
 	uint8_t RxBusyState;
-}USART_Handle;
+}
+USART_Handle;
 
 /*********************************************************************/
 

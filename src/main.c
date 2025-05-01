@@ -1,6 +1,7 @@
 
 #include "gpio_driver.h"
 #include "usart_driver.h"
+#include "rcc_driver.h"
 #include <string.h>
 
 /*
@@ -9,6 +10,7 @@ PA3 -> RX
 */
 
 USART_Handle USART2Handle;
+RCC_Handle rcc;
 
 void delay(void)
 {
@@ -81,6 +83,8 @@ int main (void)
     uint8_t receivedData = 0;
 
     uint8_t Data = 0x60;
+
+    setHSIclock(&rcc);
 
     Button_init();
 

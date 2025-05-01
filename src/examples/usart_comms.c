@@ -1,6 +1,7 @@
 
 #include "gpio_driver.h"
 #include "usart_driver.h"
+#include "rcc_driver.h"
 #include <string.h>
 #include <stdbool.h>
 
@@ -10,6 +11,7 @@ PA3 -> RX
 */
 
 USART_Handle USART2Handle;
+RCC_Handle RCCHanle;
 
 void delay(void)
 {
@@ -83,6 +85,8 @@ int main (void)
     uint8_t Data = 0x20;
 
     bool dataIsReceived = USART_GetFlagStatus(USART2, USART_FLAG_TC);
+
+    setHSIclock(&RCCHanle);
 
     Button_init();
 

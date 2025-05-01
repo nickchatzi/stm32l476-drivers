@@ -191,9 +191,7 @@ void USART_SetBaudRate(USART_RegDef *pUSARTx, uint32_t BaudRate)
 
 void USART_Init(USART_Handle *pUSARTHandle)
 {
-	uint32_t tempreg=0;
-
-    setHSIclock();
+    uint32_t tempreg=0;
 
     USART_PeriClockControl(pUSARTHandle->pUSARTx, ENABLE);
 

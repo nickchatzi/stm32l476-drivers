@@ -4,6 +4,7 @@
 
 #include "gpio_driver.h"
 #include "i2c_driver.h"
+#include "rcc_driver.h"
 #include <string.h>
 
 /*
@@ -12,6 +13,8 @@ PB9 -> I2X SDA
 */
 #define MY_ADDRESS  0X61
 #define SLAVE_ADDRESS   0X11
+
+RCC_Handle RCCHandle;
 I2C_Handle I2C1Handle;
 
 void delay(void)
@@ -81,6 +84,7 @@ int main (void)
 {
 
     uint8_t data[] = "Hello World!";
+
 
     Button_init();
 

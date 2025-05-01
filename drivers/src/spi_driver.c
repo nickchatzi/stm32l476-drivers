@@ -8,7 +8,7 @@ static void spi_crcerr_interrupt_handle(SPI_Handle *pSPIHandle);
 static void spi_fre_interrupt_handle(SPI_Handle *pSPIHandle);
 
 
-/**************************Peripheral Clock Setup*********************************
+/************************** Peripheral Clock Setup *********************************
  
  * @fn          -SPI_PeripheralControl
  * 
@@ -60,7 +60,7 @@ void SPI_PeriClockControl(SPI_RegDef *pSPIx, uint8_t EnorDi)
 
 /*************************************************************************/
 
-/********************************Init**************************************
+/******************************** Init **************************************
  
  * @fn          -SPI_Init
  * 
@@ -121,7 +121,7 @@ void SPI_Init(SPI_Handle *pSPIHandle)
 
 /*************************************************************************/
 
-/*******************************Deinit**************************************
+/******************************* Deinit **************************************
  
  * @fn          -SPI_DeInit
  * 
@@ -154,7 +154,7 @@ void SPI_DeInit(SPI_RegDef *pSPIx)
 }
 /*********************************************************************************/
 
-/*******************************SPI ENABLE**************************************
+/******************************* SPI ENABLE **************************************
  
  * @fn          -SPIPeripheralControl
  * 
@@ -184,7 +184,7 @@ void SPIPeripheralControl(SPI_RegDef *pSPIx, uint8_t EnorDi)
 }
 /*********************************************************************************/
 
-/*******************************SSI ENABLE**************************************
+/******************************* SSI ENABLE **************************************
  
  * @fn          -SPI_SSIConfig
  * 
@@ -214,7 +214,7 @@ void SPI_SSIConfig(SPI_RegDef *pSPIx, uint8_t EnorDi)
 }
 /*********************************************************************************/
 
-/*******************************SSOE ENABLE**************************************
+/******************************* SSOE ENABLE **************************************
  
  * @fn          -SSOE_SSIConfig
  * 
@@ -244,7 +244,7 @@ void SPI_SSOEConfig(SPI_RegDef *pSPIx, uint8_t EnorDi)
 }
 /*********************************************************************************/
 
-/*******************************Get Flag Status**************************************
+/******************************* Get Flag Status **************************************
  
  * @fn          -SPI_GetFlagStatus
  * 
@@ -271,7 +271,7 @@ uint8_t SPI_GetFlagStatus(SPI_RegDef *pSPIx , uint32_t FlagName)
 }
 /*********************************************************************************/
 
-/*********************************Sent Data****************************************
+/********************************* Sent Data ****************************************
  
  * @fn          -SPI_SendData
  * 
@@ -314,7 +314,7 @@ void SPI_SendData(SPI_RegDef *pSPIx, uint8_t *pTxBuffer, uint32_t Len)
 }
 /*********************************************************************************/
 
-/********************************Receive Data**************************************
+/******************************** Receive Data **************************************
  
  * @fn          -SPI_ReceiveData
  * 
@@ -357,7 +357,7 @@ void SPI_ReceiveData(SPI_RegDef *pSPIx, uint8_t *pRxBuffer, uint32_t Len)
 }
 /*********************************************************************************/
 
-/*************************Sent Data using Interrupt********************************
+/************************* Sent Data using Interrupt ********************************
  
  * @fn          -SPI_SendDataIT
  * 
@@ -392,11 +392,7 @@ uint8_t SPI_SendDataIT(SPI_Handle *pSPIHandle, uint8_t *pTxBuffer, uint32_t Len)
         /* Enable TXEIE bit to get interrupt whenever TXE flag is set in SR */
         pSPIHandle->pSPIx->CR2 |= (1<<TXEIE);
     }
-
     return state;
-
-
-    /* Data transmission will be handled by the ISR code*/
 }
 /*********************************************************************************/
 
@@ -434,7 +430,6 @@ uint8_t SPI_ReceiveDataIT(SPI_Handle *pSPIHandle, uint8_t *pRxBuffer, uint32_t L
         /* Enable RXEIE bit to get interrupt whenever RXE flag is set in SR */
         pSPIHandle->pSPIx->CR2 |= (1<<RXNEIE);
     }
-
     return state;
 }
 /*********************************************************************************/
