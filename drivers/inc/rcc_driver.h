@@ -61,6 +61,7 @@ extern uint16_t MSI_Range[12];
 
 /***********************RCC AHB PRESCALER MACROS**********************/
 
+#define AHB_NO_DIV          0
 #define AHB_DIV_2           8
 #define AHB_DIV_4           9
 #define AHB_DIV_8           10
@@ -74,6 +75,7 @@ extern uint16_t MSI_Range[12];
 
 /***********************RCC APB1 PRESCALER MACROS*********************/
 
+#define APB1_NO_DIV          0
 #define APB1_DIV_2           4
 #define APB1_DIV_4           5
 #define APB1_DIV_8           6
@@ -83,6 +85,7 @@ extern uint16_t MSI_Range[12];
 
 /***********************RCC APB2 PRESCALER MACROS*********************/
 
+#define APB2_NO_DIV          0
 #define APB2_DIV_2           4
 #define APB2_DIV_4           5
 #define APB2_DIV_8           6

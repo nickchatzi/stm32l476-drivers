@@ -5,21 +5,33 @@
 #include "gpio_driver.h"
 #include "i2c_driver.h"
 #include "rcc_driver.h"
-#include <string.h>
 
 /*
 PB6 -> I2C_SCL
 PB9 -> I2X SDA
 */
-#define MY_ADDRESS  0X61
-#define SLAVE_ADDRESS   0X11
+#define MY_ADDRESS      0x60
+#define SLAVE_ADDRESS   0xA2
 
 RCC_Handle RCCHandle;
 I2C_Handle I2C1Handle;
 
+
 void delay(void)
 {
   for (uint32_t i = 0; i<250000; i++);
+}
+
+void HSI_Init(void)
+{
+  RCC_Handle rcc;
+  rcc.pRCC = RCC;
+
+  rcc.RCC_Config.RCC_AHB_Presc = AHB_NO_DIV;
+  rcc.RCC_Config.RCC_APB1 = APB1_NO_DIV;
+  rcc.RCC_Config.RCC_APB2 = APB2_NO_DIV;
+
+  setHSIclock(&rcc);
 }
 
 void I2C1_GPIOInits(void)
@@ -45,10 +57,10 @@ void I2C1_GPIOInits(void)
 void I2C_Inits(void)
 {
 I2C1Handle.pI2Cx = I2C1;
-//I2C1Handle.I2C_Config.I2C_ACKControl = I2C_ACK_ENABLE;
 I2C1Handle.I2C_Config.I2C_DeviceAddress = MY_ADDRESS;
 I2C1Handle.I2C_Config.I2C_Freq = I2C_BUS_100KHZ;
 I2C1Handle.I2C_Config.I2C_Mode = I2C_SCL_SPEED_SM;
+I2C1Handle.I2C_Config.I2C_NoStretch = I2C_DISABLE_NO_STRETCH;
 
 I2C_Init(&I2C1Handle);
 }
@@ -82,9 +94,12 @@ void LED_Init()
 
 int main (void)
 {
-
+    uint8_t data[4] = {0xA2,0x11,0x11,0x45};
     uint8_t data[] = "Hello World!";
 
+    uint8_t prev_button_state = 1;
+   
+    HSI_Init();
 
     Button_init();
 
@@ -94,16 +109,31 @@ int main (void)
 
     I2C_Inits();
 
+    //I2C1->CR2 |= (1 <<11);
+
     I2C_PeripheralControl(I2C1, ENABLE);
 
-    while(1)
-    {
-        while (GPIO_ReadFromInputPin(GPIOC,GPIO_PIN_NO_13));
 
+while (1)
+{
+    uint8_t curr_button_state = GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NO_13);
+
+    // Detect falling edge: not pressed -> pressed
+    if (prev_button_state == 1 && curr_button_state == 0)
+    {
         delay(); 
-  
-        I2C_MasterSendData(&I2C1Handle,data,strlen((char*)data),SLAVE_ADDRESS, I2C_DISABLE_SR);
+
+        if (GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NO_13) == 0)
+        {
+            I2C_MasterSendData(&I2C1Handle, data, 4, SLAVE_ADDRESS, I2C_DISABLE_SR);
+            I2C_MasterSendData(&I2C1Handle,data,strlen((char*)data),SLAVE_ADDRESS, I2C_DISABLE_SR);
+
+        }
     }
+
+    prev_button_state = curr_button_state;
+}
+
 
 }
 

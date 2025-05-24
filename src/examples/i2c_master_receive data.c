@@ -11,8 +11,8 @@
 PB6 -> I2C_SCL
 PB9 -> I2X SDA
 */
-#define MY_ADDRESS      0X61
-#define SLAVE_ADDRESS   0X68
+#define MY_ADDRESS      0X60
+#define SLAVE_ADDRESS   0X25
 
 RCC_Handle RCCHandle;
 I2C_Handle I2C1Handle;
@@ -45,10 +45,10 @@ void I2C1_GPIOInits(void)
 void I2C_Inits(void)
 {
 I2C1Handle.pI2Cx = I2C1;
-//I2C1Handle.I2C_Config.I2C_ACKControl = I2C_ACK_ENABLE;
 I2C1Handle.I2C_Config.I2C_DeviceAddress = MY_ADDRESS;
 I2C1Handle.I2C_Config.I2C_Freq = I2C_BUS_100KHZ;
 I2C1Handle.I2C_Config.I2C_Mode = I2C_SCL_SPEED_SM;
+I2C1Handle.I2C_Config.I2C_NoStretch = I2C_DISABLE_NO_STRETCH;
 
 I2C_Init(&I2C1Handle);
 }
@@ -98,11 +98,8 @@ int main (void)
     
     while(1)
     {
-        while (GPIO_ReadFromInputPin(GPIOC,GPIO_PIN_NO_13));
-        
-        I2C_MasterReceiveData(&I2C1Handle,receivedData,strlen((char*)receivedData),SLAVE_ADDRESS, I2C_ENABLE_SR);
-  
-        GPIO_ToggleOutputPin(GPIOD, GPIO_PIN_NO_12);
+      
+        I2C_SlaveReceiveData(I2C1);
 
     }
 }

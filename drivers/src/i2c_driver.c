@@ -24,7 +24,7 @@ static void i2c_pecerr_event_handle(I2C_Handle *pI2CHandle);
 static void i2c_timeout_event_handle(I2C_Handle *pI2CHandle);
 static void i2c_alert_event_handle(I2C_Handle *pI2CHandle);
 
-/*******************************I2C ENABLE**************************************
+/******************************* I2C ENABLE **************************************
  
  * @fn          -I2C_PeripheralControl
  * 
@@ -51,9 +51,9 @@ void I2C_PeripheralControl(I2C_RegDef *pI2Cx, uint8_t EnorDi)
         pI2Cx->CR1 &= ~(1 << PE);
     }
 }
-/*************************************************************************/
+/**********************************************************************************/
 
-/**************************Peripheral Clock Setup*********************************
+/************************** Peripheral Clock Setup *********************************
  
  * @fn          -I2C_PeripheralControl
  * 
@@ -103,13 +103,13 @@ void I2C_PeriClockControl(I2C_RegDef *pI2Cx, uint8_t EnorDi)
 }
 /*************************************************************************/
 
-/********************************Init**************************************
+/******************************** Init **************************************
  
  * @fn          -I2C_Init
  * 
  * @brief       -This function initializes the I2C communication protocol
  * 
- * @param[in]   -Base address of the SPI port
+ * @param[in]   -Base address of the TIM port
  * @param[in]   -
  * @param[in]   -
  * 
@@ -131,15 +131,31 @@ void I2C_Init(I2C_Handle *pI2CHandle)
     tempreg |= timingSettings(pI2CHandle);
     pI2CHandle->pI2Cx->TIMINGR = tempreg;
 
+    //No stretch configuration
+    tempreg = 0;
+    tempreg |= pI2CHandle->I2C_Config.I2C_NoStretch << NOSTRETCH;
+    pI2CHandle->pI2Cx->CR1 = tempreg;
+
     //Program the device own address
     tempreg = 0;
-    tempreg |= pI2CHandle->I2C_Config.I2C_DeviceAddress << 1;
-    tempreg |= (1 << 15);
+
+    if (pI2CHandle->I2C_Config.I2C_OwnAddressMode == I2C_7BIT_ADDRESS_MODE)
+    {
+        tempreg |= pI2CHandle->I2C_Config.I2C_DeviceAddress << 1;
+    }
+    else
+    {
+        tempreg |= (1 << OA1MODE);
+        tempreg |= pI2CHandle->I2C_Config.I2C_DeviceAddress << OA1;
+    }
+
+    tempreg |= (1 << OA1EN);
+    
     pI2CHandle->pI2Cx->OAR1 = tempreg;
 }
 /*************************************************************************/
 
-/*******************************Deinit**************************************
+/******************************* Deinit **************************************
  
  * @fn          -I2C_DeInit
  * 
@@ -176,7 +192,7 @@ void I2C_DeInit(I2C_RegDef *pI2Cx)
 }
 /*****************************************************************************************/
 
-/*********************************Master Sent Data****************************************
+/********************************* Master Sent Data ****************************************
  
  * @fn          -I2C_MasterSendData
  * 
@@ -192,7 +208,7 @@ void I2C_DeInit(I2C_RegDef *pI2Cx)
  * @note        -none
  
 */
-
+#if 0
 void I2C_MasterSendData(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_t length, uint8_t slaveAddr, uint8_t Sr)
 {
     // Ensure that the I2C bus is free before initiating a transfer
@@ -230,9 +246,60 @@ void I2C_MasterSendData(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_t len
     }
 }
 
+#else
+void I2C_MasterSendData(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_t length, uint8_t slaveAddr, uint8_t Sr)
+{
+    // Wait until BUSY flag is cleared (bus free)
+    while (pI2CHandle->pI2Cx->ISR & (1 << BUSY));
+
+    // Clear old configuration in CR2
+    pI2CHandle->pI2Cx->CR2 &= ~((0x3FF << 0) | (0xFF << NBYTES) | (1 << RD_WRN));  // Clear SADD, NBYTES, RD_WRN
+
+    // Configure CR2
+    if (pI2CHandle->I2C_Config.I2C_SlaveAddressMode == I2C_10BIT_ADDRESS_MODE)
+    {
+        pI2CHandle->pI2Cx->CR2 |= (1 << ADD10);
+        pI2CHandle->pI2Cx->CR2 |= (slaveAddr & 0x3FF);     // 10-bit address 
+    }
+    else
+    {
+        pI2CHandle->pI2Cx->CR2 |= (slaveAddr << 1);     // 7-bit address
+    }
+
+    pI2CHandle->pI2Cx->CR2 |= (length << NBYTES);       // Set NBYTES
+    pI2CHandle->pI2Cx->CR2 &= ~(1 << RD_WRN);           // Write mode
+
+    // Enable TX interrupt (optional if polling TXIS)
+    pI2CHandle->pI2Cx->CR1 |= (1 << TXIE);
+
+    // Generate START condition
+    pI2CHandle->pI2Cx->CR2 |= (1 << START);
+
+    // Transmit all bytes
+    while (length > 0)
+    {
+        // Wait until TXIS is set
+        while (!(pI2CHandle->pI2Cx->ISR & (1 << TXIS)));
+
+        // Send next byte
+        pI2CHandle->pI2Cx->TXDR = *pTxBuffer++;
+        length--;
+    }
+
+    // Wait until Transfer Complete (TC) flag is set
+    while (!(pI2CHandle->pI2Cx->ISR & (1 << TC)));
+
+    // If no repeated start is requested, send STOP
+    if (Sr == I2C_DISABLE_SR)
+    {
+        pI2CHandle->pI2Cx->CR2 |= (1 << STOP);
+    }
+}
+#endif
+
 /********************************************************************************************/
 
-/*********************************Master Receive Data****************************************
+/********************************* Master Receive Data ****************************************
  
  * @fn          -I2C_MasterReceiveData
  * 
@@ -285,7 +352,7 @@ void I2C_MasterReceiveData(I2C_Handle *pI2CHandle, uint8_t *pRxBuffer, uint32_t 
 }
 /************************************************************************************/
 
-/*************************Sent Data using Interrupt********************************
+/************************* Sent Data using Interrupt ********************************
  
  * @fn          -I2C_MasterSendDataIT
  * 
@@ -328,7 +395,7 @@ uint8_t I2C_MasterSendDataIT(I2C_Handle *pI2CHandle, uint8_t *pTxBuffer, uint32_
 
 /************************************************************************************/
 
-/************************Receive Data using Interrupt******************************
+/************************ Receive Data using Interrupt ******************************
  
  * @fn          -I2C_MasterReceiveDataIT
  * 
@@ -371,7 +438,7 @@ uint8_t I2C_MasterReceiveDataIT(I2C_Handle *pI2CHandle, uint8_t *pRxBuffer, uint
 
 /***************************************************************************************/
 
-/*********************************Slave Sent Data****************************************
+/********************************* Slave Sent Data ****************************************
  
  * @fn          -I2C_SlaveSendData
  * 
@@ -397,7 +464,7 @@ void I2C_SlaveSendData(I2C_RegDef *pI2Cx , uint8_t data)
 }
 /******************************************************************************************/
 
-/*********************************Slave Receive Data****************************************
+/********************************* Slave Receive Data ****************************************
  
  * @fn          -I2C_SlaveReceiveData
  * 
@@ -424,7 +491,7 @@ uint8_t I2C_SlaveReceiveData(I2C_RegDef *pI2Cx)
 }
 /*******************************************************************************************/
 
-/************************************Get Flag Status*****************************************
+/************************************ Get Flag Status *****************************************
  
  * @fn          -I2C_GetFlagStatus
  * 
@@ -451,7 +518,7 @@ uint8_t I2C_GetFlagStatus(I2C_RegDef *pI2Cx , uint32_t FlagName)
 }
 /*************************************************************************/
 
-/***************************IRQ Interrupt Config***********************************
+/*************************** IRQ Interrupt Config ***********************************
  
  * @fn          -I2C_IRQInterruptConfig
  * 
@@ -502,7 +569,7 @@ void I2C_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
 }
 /*************************************************************************/
 
-/***************************IRQ Priority Config***********************************
+/*************************** IRQ Priority Config ***********************************
  
  * @fn          -I2C_IRQPriorityConfig
  * 
@@ -528,7 +595,7 @@ void I2C_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQPriority)
 }
 /*************************************************************************/
 
-/*********************IRQ Event Interrupt Config****************************
+/********************* IRQ Event Interrupt Config ***************************
  
  * @fn          -I2C_EV_IRQHandling
  * 
@@ -616,7 +683,7 @@ void I2C_EV_IRQHandling(I2C_Handle *pI2CHandle)
 }
 /*************************************************************************/
 
-/*********************IRQ Error Interrupt Config****************************
+/********************* IRQ Error Interrupt Config ****************************
  
  * @fn          -I2C_ER_IRQHandling
  * 

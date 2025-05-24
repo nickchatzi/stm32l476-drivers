@@ -12,6 +12,9 @@ typedef struct
     uint8_t I2C_Mode;
     uint8_t I2C_DeviceAddress;
     uint8_t I2C_FMDutyCycle;
+    uint8_t I2C_NoStretch;
+    uint8_t I2C_OwnAddressMode;
+    uint8_t I2C_SlaveAddressMode;
 
 }I2C_Config;
 
@@ -61,6 +64,20 @@ typedef struct
 
 /*********************************************************************/
 
+/********************NO STRETCH CONFIFURATION MACROS******************/
+
+#define I2C_ENABLE_NO_STRETCH     	        RESET
+#define I2C_DISABLE_NO_STRETCH  	        SET
+
+/*********************************************************************/
+
+/*****************ADDRESS MODE CONFIFURATION MACROS*******************/
+
+#define I2C_7BIT_ADDRESS_MODE  	            0
+#define I2C_10BIT_ADDRESS_MODE  	        1
+
+/*********************************************************************/
+
 /********************CR1 REGISTER BIT DEFINITIONS*********************/
 
 #define PE                                  0     
@@ -93,6 +110,14 @@ typedef struct
 #define RELOAD                              24
 #define AUTOEND                             25
 #define PECBYTE                             26
+
+/*********************************************************************/
+
+/********************CR2 REGISTER BIT DEFINITIONS*********************/
+
+#define OA1                                 0    
+#define OA1MODE                             10
+#define OA1EN                               15
 
 /*********************************************************************/
 

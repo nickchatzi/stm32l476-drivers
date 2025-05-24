@@ -82,6 +82,39 @@ typedef struct
 
 /*********************************************************************/
 
+/*********************STRUCTURE FOR TIM REGISTERS*********************/
+
+typedef struct
+{
+    volatile uint32_t CR1;    
+    volatile uint32_t CR2;
+    volatile uint32_t SMCR;
+    volatile uint32_t DIER;
+    volatile uint32_t SR;
+    volatile uint32_t CCMR1;
+    volatile uint32_t CCMR2;
+    volatile uint32_t CCER;
+    volatile uint32_t CNT;
+    volatile uint32_t PSC;
+    volatile uint32_t ARR;
+    volatile uint32_t RCR;
+    volatile uint32_t CCR1;
+    volatile uint32_t CCR2;
+    volatile uint32_t CCR3;
+    volatile uint32_t CCR4;
+    volatile uint32_t BDTR;
+    volatile uint32_t DCR;
+    volatile uint32_t DMAR;
+    volatile uint32_t OR1;
+    volatile uint32_t CCMR3;
+    volatile uint32_t CCR5;
+    volatile uint32_t CCR6;
+    volatile uint32_t OR2;
+    volatile uint32_t OR3;
+
+}TIM_RegDef;
+/**********************************************************************/
+
 /*********************STRUCTURE FOR RCC REGISTERS*********************/
 
 typedef struct
@@ -130,7 +163,7 @@ typedef struct
 }RCC_RegDef;
 /**********************************************************************/
 
-/*******************STRUCTURE FOR EXTI REGISTERS*******************/
+/*******************STRUCTURE FOR EXTI REGISTERS***********************/
 
 typedef struct
 {
@@ -248,6 +281,23 @@ typedef struct
 
 /*********************************************************************/
 
+
+/*******************BASE ADDRESSES OF TIMER PERIPHERALS***************/
+
+#define TIM1_BASEADDR                  (APB2PERIPH_BASEADDR + 0x2C00)
+#define TIM2_BASEADDR                  (APB1PERIPH_BASEADDR + 0x0000)
+#define TIM3_BASEADDR                  (APB1PERIPH_BASEADDR + 0x0400)
+#define TIM4_BASEADDR                  (APB1PERIPH_BASEADDR + 0x0800)
+#define TIM5_BASEADDR                  (APB1PERIPH_BASEADDR + 0x0C00)
+#define TIM6_BASEADDR                  (APB1PERIPH_BASEADDR + 0x1000)
+#define TIM7_BASEADDR                  (APB1PERIPH_BASEADDR + 0x1400)
+#define TIM8_BASEADDR                  (APB2PERIPH_BASEADDR + 0x3400)
+#define TIM15_BASEADDR                 (APB2PERIPH_BASEADDR + 0x4000)
+#define TIM16_BASEADDR                 (APB2PERIPH_BASEADDR + 0x4400)
+#define TIM17_BASEADDR                 (APB2PERIPH_BASEADDR + 0x4800)
+
+/*********************************************************************/
+
 /*************BASE ADDRESSES OF EXT1 & SYSCFG PERIPHERAL*************/
 
 #define EXTI_BASEADDR                   (APB2PERIPH_BASEADDR + 0x0400)
@@ -271,20 +321,6 @@ typedef struct
 
 /***********************************************************************/
 
-/******PERIPHERAL DEFINITIONS BASE ADDRESSES TYPECASTED TO STRUCT******/
-
-#define RCC                             ((RCC_RegDef*) RCC_BASEADDR)
-
-#define RCC_CR_MSION                   ((uint32_t) 0x40021000) 
-
-#define SCB                             ((SCB_Type *) SCB_BASE) 
-
-#define EXTI                            ((EXTI_RegDef*) EXTI_BASEADDR)
-
-#define SYSCFG                          ((SYSCFG_RegDef*) SYSCFG_BASEADDR)
-
-/***********************************************************************/
-
 /**********SPI DEFINITIONS BASE ADDRESSES TYPECASTED TO STRUCT**********/
 
 #define SPI1                            ((SPI_RegDef*) SPI1_BASEADDR)                                      
@@ -304,11 +340,41 @@ typedef struct
 
 /**********USART DEFINITIONS BASE ADDRESSES TYPECASTED TO STRUCT**********/
 
-#define USART1                            ((USART_RegDef*) USART1_BASEADDR)                                      
-#define USART2                            ((USART_RegDef*) USART2_BASEADDR)
-#define USART3                            ((USART_RegDef*) USART3_BASEADDR)
-#define UART4                             ((USART_RegDef*) UART4_BASEADDR) 
-#define UART5                             ((USART_RegDef*) UART5_BASEADDR)   
+#define USART1                          ((USART_RegDef*) USART1_BASEADDR)                                      
+#define USART2                          ((USART_RegDef*) USART2_BASEADDR)
+#define USART3                          ((USART_RegDef*) USART3_BASEADDR)
+#define UART4                           ((USART_RegDef*) UART4_BASEADDR) 
+#define UART5                           ((USART_RegDef*) UART5_BASEADDR)   
+
+/***********************************************************************/
+
+/********TIMER DEFINITIONS BASE ADDRESSES TYPECASTED TO STRUCT**********/
+
+#define TIM1                            ((TIM_RegDef*) TIM1_BASEADDR)                                      
+#define TIM2                            ((TIM_RegDef*) TIM2_BASEADDR)
+#define TIM3                            ((TIM_RegDef*) TIM3_BASEADDR) 
+#define TIM4                            ((TIM_RegDef*) TIM4_BASEADDR) 
+#define TIM5                            ((TIM_RegDef*) TIM5_BASEADDR) 
+#define TIM6                            ((TIM_RegDef*) TIM6_BASEADDR) 
+#define TIM7                            ((TIM_RegDef*) TIM7_BASEADDR) 
+#define TIM8                            ((TIM_RegDef*) TIM8_BASEADDR) 
+#define TIM15                           ((TIM_RegDef*) TIM15_BASEADDR)
+#define TIM16                           ((TIM_RegDef*) TIM16_BASEADDR)
+#define TIM17                           ((TIM_RegDef*) TIM17_BASEADDR)
+
+/***********************************************************************/
+
+/******PERIPHERAL DEFINITIONS BASE ADDRESSES TYPECASTED TO STRUCT******/
+
+#define RCC                             ((RCC_RegDef*) RCC_BASEADDR)
+
+#define RCC_CR_MSION                   ((uint32_t) 0x40021000) 
+
+#define SCB                             ((SCB_Type *) SCB_BASE) 
+
+#define EXTI                            ((EXTI_RegDef*) EXTI_BASEADDR)
+
+#define SYSCFG                          ((SYSCFG_RegDef*) SYSCFG_BASEADDR)
 
 /***********************************************************************/
 
@@ -350,6 +416,22 @@ typedef struct
 #define USART3_PCLK_EN()                ( RCC->APB1ENR1 |= (1<<18) )
 #define UART4_PCLK_EN()                 ( RCC->APB1ENR1 |= (1<<19) )
 #define UART5_PCLK_EN()                 ( RCC->APB1ENR1 |= (1<<20) )
+
+/***********************************************************************/
+
+/***************CLOCK ENABLE MACROS FOR TIMx PERIPHERALS***************/
+
+#define TIM1_PCLK_EN()                  ( RCC->APB2ENR |= (1<<11) )
+#define TIM2_PCLK_EN()                  ( RCC->APB1ENR1 |= (1<<0) )
+#define TIM3_PCLK_EN()                  ( RCC->APB1ENR1 |= (1<<1) )
+#define TIM4_PCLK_EN()                  ( RCC->APB1ENR1 |= (1<<2) )
+#define TIM5_PCLK_EN()                  ( RCC->APB1ENR1 |= (1<<3) )
+#define TIM6_PCLK_EN()                  ( RCC->APB1ENR1 |= (1<<4) )
+#define TIM7_PCLK_EN()                  ( RCC->APB1ENR1 |= (1<<7) )
+#define TIM8_PCLK_EN()                  ( RCC->APB2ENR |= (1<<13) )
+#define TIM15_PCLK_EN()                 ( RCC->APB2ENR |= (1<<16) )
+#define TIM16_PCLK_EN()                 ( RCC->APB2ENR |= (1<<17) )
+#define TIM17_PCLK_EN()                 ( RCC->APB2ENR |= (1<<18) )
 
 /***********************************************************************/
 
@@ -400,6 +482,22 @@ typedef struct
 
 /***********************************************************************/
 
+/***************CLOCK DISABLE MACROS FOR TIMx PERIPHERALS***************/
+
+#define TIM1_PCLK_DIS()                  ( RCC->APB2ENR &= ~(1<<11) )
+#define TIM2_PCLK_DIS()                  ( RCC->APB1ENR1 &= ~(1<<0) )
+#define TIM3_PCLK_DIS()                  ( RCC->APB1ENR1 &= ~(1<<1) )
+#define TIM4_PCLK_DIS()                  ( RCC->APB1ENR1 &= ~(1<<2) )
+#define TIM5_PCLK_DIS()                  ( RCC->APB1ENR1 &= ~(1<<3) )
+#define TIM6_PCLK_DIS()                  ( RCC->APB1ENR1 &= ~(1<<4) )
+#define TIM7_PCLK_DIS()                  ( RCC->APB1ENR1 &= ~(1<<7) )
+#define TIM8_PCLK_DIS()                  ( RCC->APB2ENR &= ~(1<<13) )
+#define TIM15_PCLK_DIS()                 ( RCC->APB2ENR &= ~(1<<16) )
+#define TIM16_PCLK_DIS()                 ( RCC->APB2ENR &= ~(1<<17) )
+#define TIM17_PCLK_DIS()                 ( RCC->APB2ENR &= ~(1<<18) )
+
+/***********************************************************************/
+
 /**************CLOCK DISABLE MACRO FOR SYSCFG PERIPHERALS**************/
 
 #define SYSCFG_PCLK_DIS()                ( RCC->APB2ENR |= ~(1<<0) )
@@ -408,32 +506,32 @@ typedef struct
 
 /*******************MACROS TO RESET GPIOx PERIPHERALS*******************/
 
-#define GPIOA_REG_RESET()               do{ ( RCC->AHB2RSTR |= (1<<0) ); ( RCC->AHB2RSTR &= ~(1<<0) ); } while(0)
-#define GPIOB_REG_RESET()               do{ ( RCC->AHB2RSTR |= (1<<1) ); ( RCC->AHB2RSTR &= ~(1<<1) ); } while(0)
-#define GPIOC_REG_RESET()               do{ ( RCC->AHB2RSTR |= (1<<2) ); ( RCC->AHB2RSTR &= ~(1<<2) ); } while(0)
-#define GPIOD_REG_RESET()               do{ ( RCC->AHB2RSTR |= (1<<3) ); ( RCC->AHB2RSTR &= ~(1<<3) ); } while(0)
-#define GPIOE_REG_RESET()               do{ ( RCC->AHB2RSTR |= (1<<4) ); ( RCC->AHB2RSTR &= ~(1<<4) ); } while(0)
-#define GPIOF_REG_RESET()               do{ ( RCC->AHB2RSTR |= (1<<5) ); ( RCC->AHB2RSTR &= ~(1<<5) ); } while(0)
-#define GPIOG_REG_RESET()               do{ ( RCC->AHB2RSTR |= (1<<6) ); ( RCC->AHB2RSTR &= ~(1<<6) ); } while(0)
-#define GPIOH_REG_RESET()               do{ ( RCC->AHB2RSTR |= (1<<7) ); ( RCC->AHB2RSTR &= ~(1<<7) ); } while(0)
-#define GPIOI_REG_RESET()               do{ ( RCC->AHB2RSTR |= (1<<8) ); ( RCC->AHB2RSTR &= ~(1<<8) ); } while(0)
+#define GPIOA_REG_RESET()                do{ ( RCC->AHB2RSTR |= (1<<0) ); ( RCC->AHB2RSTR &= ~(1<<0) ); } while(0)
+#define GPIOB_REG_RESET()                do{ ( RCC->AHB2RSTR |= (1<<1) ); ( RCC->AHB2RSTR &= ~(1<<1) ); } while(0)
+#define GPIOC_REG_RESET()                do{ ( RCC->AHB2RSTR |= (1<<2) ); ( RCC->AHB2RSTR &= ~(1<<2) ); } while(0)
+#define GPIOD_REG_RESET()                do{ ( RCC->AHB2RSTR |= (1<<3) ); ( RCC->AHB2RSTR &= ~(1<<3) ); } while(0)
+#define GPIOE_REG_RESET()                do{ ( RCC->AHB2RSTR |= (1<<4) ); ( RCC->AHB2RSTR &= ~(1<<4) ); } while(0)
+#define GPIOF_REG_RESET()                do{ ( RCC->AHB2RSTR |= (1<<5) ); ( RCC->AHB2RSTR &= ~(1<<5) ); } while(0)
+#define GPIOG_REG_RESET()                do{ ( RCC->AHB2RSTR |= (1<<6) ); ( RCC->AHB2RSTR &= ~(1<<6) ); } while(0)
+#define GPIOH_REG_RESET()                do{ ( RCC->AHB2RSTR |= (1<<7) ); ( RCC->AHB2RSTR &= ~(1<<7) ); } while(0)
+#define GPIOI_REG_RESET()                do{ ( RCC->AHB2RSTR |= (1<<8) ); ( RCC->AHB2RSTR &= ~(1<<8) ); } while(0)
 
 /***********************************************************************/
 
 /*******************MACROS TO RESET SPIx PERIPHERALS*******************/
 
-#define SPI1_REG_RESET()               do{ ( RCC->APB2RSTR |=  (1<<12) ); ( RCC->APB2RSTR &= ~(1<<12) );  } while(0)
-#define SPI2_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<14) ); ( RCC->APB1RSTR1 &= ~(1<<14) ); } while(0)
-#define SPI3_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<15) ); ( RCC->APB1RSTR1 &= ~(1<<15) ); } while(0)
+#define SPI1_REG_RESET()                 do{ ( RCC->APB2RSTR |=  (1<<12) ); ( RCC->APB2RSTR &= ~(1<<12) );  } while(0)
+#define SPI2_REG_RESET()                 do{ ( RCC->APB1RSTR1 |= (1<<14) ); ( RCC->APB1RSTR1 &= ~(1<<14) ); } while(0)
+#define SPI3_REG_RESET()                 do{ ( RCC->APB1RSTR1 |= (1<<15) ); ( RCC->APB1RSTR1 &= ~(1<<15) ); } while(0)
 
 /***********************************************************************/
 
 /*******************MACROS TO RESET I2Cx PERIPHERALS*******************/
 
-#define I2C1_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<21) ); ( RCC->APB1RSTR1 &= ~(1<<21) ); } while(0)
-#define I2C2_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<22) ); ( RCC->APB1RSTR1 &= ~(1<<22) ); } while(0)
-#define I2C3_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<23) ); ( RCC->APB1RSTR1 &= ~(1<<23) ); } while(0)
-#define I2C4_REG_RESET()               do{ ( RCC->APB1RSTR2 |= (1<<1) );  ( RCC->APB1RSTR2 &= ~(1<<1) );  } while(0)
+#define I2C1_REG_RESET()                 do{ ( RCC->APB1RSTR1 |= (1<<21) ); ( RCC->APB1RSTR1 &= ~(1<<21) ); } while(0)
+#define I2C2_REG_RESET()                 do{ ( RCC->APB1RSTR1 |= (1<<22) ); ( RCC->APB1RSTR1 &= ~(1<<22) ); } while(0)
+#define I2C3_REG_RESET()                 do{ ( RCC->APB1RSTR1 |= (1<<23) ); ( RCC->APB1RSTR1 &= ~(1<<23) ); } while(0)
+#define I2C4_REG_RESET()                 do{ ( RCC->APB1RSTR2 |= (1<<1) );  ( RCC->APB1RSTR2 &= ~(1<<1) );  } while(0)
 
 /***********************************************************************/
 
@@ -444,6 +542,22 @@ typedef struct
 #define USART3_REG_RESET()               do{ ( RCC->APB1RSTR1 |= (1<<18) ); ( RCC->APB1RSTR1 &= ~(1<<18) ); } while(0)
 #define UART4_REG_RESET()                do{ ( RCC->APB1RSTR2 |= (1<<19) ); ( RCC->APB1RSTR2 &= ~(1<<19) ); } while(0)
 #define UART5_REG_RESET()                do{ ( RCC->APB1RSTR2 |= (1<<20) ); ( RCC->APB1RSTR2 &= ~(1<<20) ); } while(0)
+
+/***********************************************************************/
+
+/*******************MACROS TO RESET TIMx PERIPHERALS*******************/
+
+#define TIM1_REG_RESET()                 do{ ( RCC->APB2RSTR  |= (1<<11)); ( RCC->APB2RSTR  &= ~(1<<11)); } while(0)
+#define TIM2_REG_RESET()                 do{ ( RCC->APB1RSTR1 |= (1<<0) ); ( RCC->APB1RSTR1 &= ~(1<<0) ); } while(0)
+#define TIM3_REG_RESET()                 do{ ( RCC->APB1RSTR1 |= (1<<1) ); ( RCC->APB1RSTR1 &= ~(1<<1) ); } while(0)
+#define TIM4_REG_RESET()                 do{ ( RCC->APB1RSTR1 |= (1<<2) ); ( RCC->APB1RSTR1 &= ~(1<<2) ); } while(0)
+#define TIM5_REG_RESET()                 do{ ( RCC->APB1RSTR1 |= (1<<3) ); ( RCC->APB1RSTR1 &= ~(1<<3) ); } while(0)
+#define TIM6_REG_RESET()                 do{ ( RCC->APB1RSTR1 |= (1<<4) ); ( RCC->APB1RSTR1 &= ~(1<<4) ); } while(0)
+#define TIM7_REG_RESET()                 do{ ( RCC->APB1RSTR1 |= (1<<5) ); ( RCC->APB1RSTR1 &= ~(1<<5) ); } while(0)
+#define TIM8_REG_RESET()                 do{ ( RCC->APB1RSTR1 |= (1<<13)); ( RCC->APB1RSTR1 &= ~(1<<13)); } while(0)
+#define TIM15_REG_RESET()                do{ ( RCC->APB2RSTR  |= (1<<15)); ( RCC->APB2RSTR &= ~(1<<15) ); } while(0)
+#define TIM16_REG_RESET()                do{ ( RCC->APB2RSTR  |= (1<<16)); ( RCC->APB2RSTR &= ~(1<<16) ); } while(0)
+#define TIM17_REG_RESET()                do{ ( RCC->APB2RSTR  |= (1<<17)); ( RCC->APB2RSTR &= ~(1<<17) ); } while(0)
 
 /***********************************************************************/
 
@@ -493,6 +607,25 @@ typedef struct
 #define IRQ_NO_UART4	                52
 #define IRQ_NO_UART5	                53
 #define IRQ_NO_USART6	                71
+
+//TIMER IRQ NUMBERS
+#define IRQ_NO_TIM1_BRK                 24
+#define IRQ_NO_TIM1_UP                  25
+#define IRQ_NO_TIM1_TRG_COM             26
+#define IRQ_NO_TIM1_CC                  27
+#define IRQ_NO_TIM2                     28
+#define IRQ_NO_TIM3                     29
+#define IRQ_NO_TIM4                     30
+#define IRQ_NO_TIM5                     50
+#define IRQ_NO_TIM6                     54
+#define IRQ_NO_TIM7                     55
+#define IRQ_NO_TIM18_BRK                43
+#define IRQ_NO_TIM18_UP                 44
+#define IRQ_NO_TIM18_TRG_COM            45
+#define IRQ_NO_TIM18_CC                 46
+#define IRQ_NO_TIM15                    24
+#define IRQ_NO_TIM16                    25
+#define IRQ_NO_TIM17                    26
 
 /***********************************************************************/
 

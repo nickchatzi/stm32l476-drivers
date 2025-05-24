@@ -160,9 +160,28 @@ uint32_t RCC_GetPCLK2Value(void)
 	return pclk2;
 }
 
+/******************************* SET HSI CLOCK **************************************
+ 
+ * @fn          -setHSIclock
+ * 
+ * @brief       -This function will set HSI as the default clock source.
+ * 
+ * @param[in]   -Base address of the RCC register
+ * @param[in]   -
+ * @param[in]   -
+ * 
+ * @return      -void
+ * 
+ * @note        -none
+ 
+*/
+
 void setHSIclock(RCC_Handle *pRCCHandle)
 {
 	uint32_t temp = 0;
+
+	// Clear MSI bit
+	pRCCHandle->pRCC->CR &= ~(1 << MSION);
 
 	// Enable HSI clock
 	pRCCHandle->pRCC->CR |= (1 << HSION);
@@ -170,12 +189,13 @@ void setHSIclock(RCC_Handle *pRCCHandle)
 	// Wait for HSI to be ready
 	while (!(pRCCHandle->pRCC->CR & (1 << HSIRDY))); 
 
-	temp = pRCCHandle->pRCC->CFGR;
-	temp |= (1 << SW); 
-	// Select HSI as system clock  
+	// Select HSI as system clock 
+	pRCCHandle->pRCC->CFGR  |= (1 << SW);  
 
 	// Wait until the switch is complete
 	while ((pRCCHandle->pRCC->CFGR & (3 << SWS)) != (1 << SWS));  
+
+	temp = pRCCHandle->pRCC->CFGR;
 
 	//Configure the AHB prescaler
 	temp &= ~(0xF << HPRE);
@@ -189,8 +209,25 @@ void setHSIclock(RCC_Handle *pRCCHandle)
 	temp &= ~(0x7 << PPRE2);
 	temp |= (pRCCHandle->RCC_Config.RCC_APB2 << PPRE2);
 	
-	pRCCHandle->pRCC->CFGR = temp;
+	pRCCHandle->pRCC->CFGR = temp; 
+	
 }
+
+/******************************* SET HSE CLOCK **************************************
+ 
+ * @fn          -setHSEclock
+ * 
+ * @brief       -This function will set HSE as the default clock source.
+ * 
+ * @param[in]   -Base address of the RCC register
+ * @param[in]   -
+ * @param[in]   -
+ * 
+ * @return      -void
+ * 
+ * @note        -none
+ 
+*/
 
 void setHSEclock(RCC_Handle *pRCCHandle)
 {
@@ -225,6 +262,22 @@ void setHSEclock(RCC_Handle *pRCCHandle)
 
 }
 
+/******************************* SET MSI CLOCK **************************************
+ 
+ * @fn          -setMSIclock
+ * 
+ * @brief       -This function will set MSI as the default clock source.
+ * 
+ * @param[in]   -Base address of the RCC register
+ * @param[in]   -
+ * @param[in]   -
+ * 
+ * @return      -void
+ * 
+ * @note        -none
+ 
+*/
+
 void setMSIclock(RCC_Handle *pRCCHandle)
 {
 	// Configure MSI range clock frequency after standby mode
@@ -249,6 +302,22 @@ void setMSIclock(RCC_Handle *pRCCHandle)
 	// Wait until the switch is complete
 	while ((pRCCHandle->pRCC->CFGR & (3 << SWS)) != (0x0 << SWS));  
 }
+
+/******************************* SET PLL CLOCK **************************************
+ 
+ * @fn          -setPLLclock
+ * 
+ * @brief       -This function will set PLL as the default clock source.
+ * 
+ * @param[in]   -Base address of the RCC register
+ * @param[in]   -
+ * @param[in]   -
+ * 
+ * @return      -void
+ * 
+ * @note        -none
+ 
+*/
 
 void setPLLclock(RCC_Handle *pRCCHandle)
 {
@@ -342,7 +411,10 @@ void setPLLclock(RCC_Handle *pRCCHandle)
 
 }
 
-PLLDividers returnVariables(RCC_Handle *pRCCHandle)
+/*
+Help function to return the actual divider values for P, Q and R
+*/
+static PLLDividers returnVariables(RCC_Handle *pRCCHandle)
 {
 	PLLDividers pll_dividers;
 
