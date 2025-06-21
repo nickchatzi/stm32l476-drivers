@@ -37,21 +37,15 @@ int main (void)
 
   GPIO_Init(&button);
   
-  //SystemInit();
   GPIO_IRQPriorityConfig(IRQ_NO_EXTI15_10, 15);
   GPIO_IRQInterruptConfig(IRQ_NO_EXTI15_10, ENABLE);
   
-  while(1)
-  {  
-  }
+  while(1);
 
-  //return 0;
 }
 
 void EXTI15_10_IRQHandler()
 {
-  //printf("EXTI9_5 Interrupt Handler Executed\n");
-  delay();
   GPIO_IRQHandling(GPIO_PIN_NO_13);
   GPIO_ToggleOutputPin(GPIOA,GPIO_PIN_NO_5);
 }

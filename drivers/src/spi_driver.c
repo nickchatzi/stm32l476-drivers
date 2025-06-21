@@ -293,7 +293,6 @@ void SPI_SendData(SPI_RegDef *pSPIx, uint8_t *pTxBuffer, uint32_t Len)
     {
         //Wait until TXE is empty
         while (!(pSPIx->SR & (1 << TXE))); 
-        /*FUTURE UPDATE ADD WATCHDOG SET UP TO PREVENT WHILE HANGING*/
 
         //Then check the DFF (CRCL) BIT in CR1 register
         if (pSPIx->CR1 & (1 << CRCL)) 
@@ -306,7 +305,7 @@ void SPI_SendData(SPI_RegDef *pSPIx, uint8_t *pTxBuffer, uint32_t Len)
         }
         else
         {
-            pSPIx->DR = *pTxBuffer; 
+             *((volatile uint8_t*)&pSPIx->DR) = *pTxBuffer; 
             Len--;
             pTxBuffer++;
         }
@@ -736,7 +735,7 @@ void SPI_CloseReception(SPI_Handle *pSPIHandle)
     pSPIHandle->RxState = SPI_READY;    
 }
 
-__attribute__((weak)) void SPIApplicationEventCallback(SPI_Handle *pSPIHandle, uint8_t AppEv)
+void SPIApplicationEventCallback(SPI_Handle *pSPIHandle, uint8_t AppEv)
 {
 }
 

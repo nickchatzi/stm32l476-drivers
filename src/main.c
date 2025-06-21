@@ -1,28 +1,22 @@
-/*
-This example writes and the reads to address 0x1200 from 24LC256 EEPROM chip the value 0x60.
-Chip select bits are A2=0, A1=0, A0=1
-*/
-
 #include "gpio_driver.h"
-#include "i2c_driver.h"
+#include "spi_driver.h"
 #include "rcc_driver.h"
+#include "lcd.h"
+#include <string.h>
 
 /*
-PB6 -> I2C_SCL
-PB9 -> I2X SDA
+PB14 -> SPI2_MISO
+PB15 -> SPI2_MOSI
+PB13 -> SPI2_SCLK
+PB12 -> SPI2_NSS
 */
-#define MY_ADDRESS  0x60
-#define SLAVE_ADDRESS   0x51
 
 RCC_Handle RCCHandle;
-I2C_Handle I2C1Handle;
-
-uint8_t rcv_buf[32];
 
 
 void delay(void)
 {
-  for (volatile uint32_t i = 0; i<10000; i++);
+  for (uint32_t i = 0; i<300000; i++);
 }
 
 void HSI_Init(void)
@@ -37,45 +31,97 @@ void HSI_Init(void)
   setHSIclock(&rcc);
 }
 
-void I2C1_GPIOInits(void)
+void SPI2_GPIOInits(void)
 {
-  GPIO_Handle I2CPins;
-  
-  I2CPins.pGpiox = GPIOB;
-  I2CPins.Gpio_PinConfig.GPIO_PinMode = GPIO_MODE_ALTFN;
-  I2CPins.Gpio_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_OD;
-  I2CPins.Gpio_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PU;
-  I2CPins.Gpio_PinConfig.GPIO_PinAltFunMode = 4;
-  I2CPins.Gpio_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+  GPIO_Handle SPIPins;
+
+  SPIPins.pGpiox = GPIOB;
+  SPIPins.Gpio_PinConfig.GPIO_PinMode = GPIO_MODE_ALTFN;
+  SPIPins.Gpio_PinConfig.GPIO_PinAltFunMode = 7;
+  SPIPins.Gpio_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+  SPIPins.Gpio_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
+  SPIPins.Gpio_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 
   //SCL
-  I2CPins.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_6;
-  GPIO_Init(&I2CPins);
+  SPIPins.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_13;
+  GPIO_Init(&SPIPins);
 
-  //SDA
-  I2CPins.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_9;
-  GPIO_Init(&I2CPins);
+  //MOSI
+  SPIPins.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_15;
+  GPIO_Init(&SPIPins);
+
+  //MISO
+  //SPIPins.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_14;
+  //GPIO_Init(&SPIPins);
+
+  //NSS
+  //SPIPins.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_12;
+  //GPIO_Init(&SPIPins);
 }
 
-void I2C_Inits(void)
+void SPI2_Inits(void)
 {
-I2C1Handle.pI2Cx = I2C1;
-I2C1Handle.I2C_Config.I2C_DeviceAddress = MY_ADDRESS;
-I2C1Handle.I2C_Config.I2C_Freq = I2C_BUS_100KHZ;
-I2C1Handle.I2C_Config.I2C_Mode = I2C_SCL_SPEED_SM;
-//I2C1Handle.I2C_Config.I2C_NoStretch = I2C_DISABLE_NO_STRETCH;
-//I2C1Handle.I2C_Config.I2C_OwnAddressMode = I2C_10BIT_ADDRESS_MODE;
-I2C1Handle.I2C_Config.I2C_SlaveAddressMode = I2C_7BIT_ADDRESS_MODE;
-
-I2C_Init(&I2C1Handle);
+  SPI_Handle SPI2handle;
+  SPI2handle.pSPIx = SPI2;
+  SPI2handle.SPIConfig.SPI_BusConfig = SPI_BUS_CONFIG_FD;
+  SPI2handle.SPIConfig.SPI_DeviceMode = SPI_DEVICE_MODE_MASTER;
+  SPI2handle.SPIConfig.SPI_SclkSpeed = SPI_SCLK_SPEED_DIV8;
+  SPI2handle.SPIConfig.SPI_DFF = SPI_DFF_8BITS;
+  SPI2handle.SPIConfig.SPI_CPOL = SPI_CPOL_HIGH;
+  SPI2handle.SPIConfig.SPI_CPHA = SPI_CPHA_HIGH;
+  SPI2handle.SPIConfig.SPI_SSM = SPI_SSM_EN;  
+  
+  SPI_Init(&SPI2handle);
 }
 
-void Button_init(void)
+void RSTPIN_Init()
+{
+  GPIO_Handle GpioRst;
+
+  GpioRst.pGpiox = GPIOA;
+  GpioRst.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_8;
+  GpioRst.Gpio_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+  GpioRst.Gpio_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+  GpioRst.Gpio_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
+  GpioRst.Gpio_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+
+  GPIO_Init(&GpioRst);
+}
+
+void RSPIN_Init()
+{
+  GPIO_Handle GpioRs;
+
+  GpioRs.pGpiox = GPIOA;
+  GpioRs.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_9;
+  GpioRs.Gpio_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+  GpioRs.Gpio_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+  GpioRs.Gpio_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
+  GpioRs.Gpio_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+
+  GPIO_Init(&GpioRs);
+}
+
+void CSPIN_Init()
+{
+  GPIO_Handle GpioCS;
+
+  GpioCS.pGpiox = GPIOB;
+  GpioCS.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_12;
+  GpioCS.Gpio_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+  GpioCS.Gpio_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+  GpioCS.Gpio_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
+  GpioCS.Gpio_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+
+  GPIO_Init(&GpioCS);
+}
+
+void ButtonUp_init(void)
 {
   GPIO_Handle button;
 
-  button.pGpiox = GPIOC;
-  button.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_13;
+  button.pGpiox = GPIOA;
+  button.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_5;
   button.Gpio_PinConfig.GPIO_PinMode = GPIO_MODE_IN;
   button.Gpio_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
   button.Gpio_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PU;
@@ -83,69 +129,150 @@ void Button_init(void)
   GPIO_Init(&button);
 }
 
-void LED_Init()
+void ButtonEnter_init(void)
 {
-  GPIO_Handle GpioLed;
+  GPIO_Handle button;
 
-  GpioLed.pGpiox = GPIOA;
-  GpioLed.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_5;
-  GpioLed.Gpio_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
-  GpioLed.Gpio_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
-  GpioLed.Gpio_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
-  GpioLed.Gpio_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+  button.pGpiox = GPIOA;
+  button.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_6;
+  button.Gpio_PinConfig.GPIO_PinMode = GPIO_MODE_IN;
+  button.Gpio_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+  button.Gpio_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PU;
 
-  GPIO_Init(&GpioLed);
+  GPIO_Init(&button);
 }
 
-int main (void)
+void ButtonDown_init(void)
 {
-    uint8_t dataAddress[2] = {0x12,0x00};
+  GPIO_Handle button;
+  memset(&button,0,sizeof(button));
 
-    uint8_t data[3] = {0x12,0x00 ,0x60};
+  button.pGpiox = GPIOC;
+  button.Gpio_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_13;
+  button.Gpio_PinConfig.GPIO_PinMode = GPIO_MODE_IT_FT;
+  button.Gpio_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+  button.Gpio_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PU;
 
-    uint8_t received_data[1];
+  GPIO_Init(&button);
+}
 
-    uint8_t prev_button_state = 1;
-   
-    HSI_Init();
+int main(void)
+{
+  char menu[] = "Menu";
+  char line[] = "---------------------";
+  char arrow[] = ">";
+  char option1[] = "Option 1";
+  char option2[] = "Option 2";
+  char option3[] = "Option 3";
+  char option4[] = "Option 4";
+  char option5[] = "Option 5";
+  char option6[] = "Option 6";
 
-    Button_init();
+  HSI_Init();
 
-    LED_Init();
+  RSTPIN_Init();
+  RSPIN_Init();
+  CSPIN_Init();
+  ButtonUp_init();
+  ButtonEnter_init(); 
+  ButtonDown_init();
+  SPI2_GPIOInits();
+  SPI2_Inits();
 
-    I2C1_GPIOInits();
+  GPIO_IRQPriorityConfig(IRQ_NO_EXTI15_10, 15);
+  GPIO_IRQInterruptConfig(IRQ_NO_EXTI15_10, ENABLE);
 
-    I2C_Inits();
+  SPI_SSIConfig(SPI2, ENABLE);
+  SPIPeripheralControl(SPI2, ENABLE);
 
-    I2C_PeripheralControl(I2C1, ENABLE);
+  lcd_init();
+  lcd_set_black_background();
 
-    while (1)
-    {
-        uint8_t curr_button_state = GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NO_13);
+  lcd_set_page(0);
+  lcd_set_column(50);
+  
+  for (int i = 0; i < strlen(menu); i++) {
+    lcd_write_char(menu[i]);
+  }
 
-        // Detect falling edge: not pressed -> pressed
-        if (prev_button_state == 1 && curr_button_state == 0)
-        {
-            delay(); 
+  lcd_set_page(1);
+  lcd_set_column(1);
+  
+  for (int i = 0; i < strlen(line); i++) {
+    lcd_write_char(line[i]);
+  }
 
-            if (GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NO_13) == 0)
-            {
-                I2C_MasterSendData(&I2C1Handle, data, 3, SLAVE_ADDRESS, I2C_DISABLE_SR);
+  lcd_set_page(2);
+  lcd_set_column(1);
+  
+  for (int i = 0; i < strlen(arrow); i++) {
+    lcd_write_char(arrow[i]);
+  }
 
-                delay();
+  lcd_set_page(2);
+  lcd_set_column(10);
 
-                I2C_MasterSendData(&I2C1Handle, dataAddress, 2, SLAVE_ADDRESS, I2C_ENABLE_SR);
+  for (int i = 0; i < strlen(option1); i++) {
+    lcd_write_char(option1[i]);
+  }
 
-                I2C_MasterReceiveData(&I2C1Handle, received_data, 1, SLAVE_ADDRESS, I2C_DISABLE_SR);
+  lcd_set_page(3);
+  lcd_set_column(10);
 
-                if (received_data[0] == 0x60)
-                {
-                    GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_5);
-                }
+  for (int i = 0; i < strlen(option2); i++) {
+    lcd_write_char(option2[i]);
+  }
 
-            }
-        }
+  lcd_set_page(4);
+  lcd_set_column(10);
 
-        prev_button_state = curr_button_state;
+  for (int i = 0; i < strlen(option3); i++) {
+    lcd_write_char(option3[i]);
+  }
+
+  lcd_set_page(5);
+  lcd_set_column(10);
+
+  for (int i = 0; i < strlen(option4); i++) {
+    lcd_write_char(option4[i]);
+  }
+
+  lcd_set_page(6);
+  lcd_set_column(10);
+
+  for (int i = 0; i < strlen(option5); i++) {
+    lcd_write_char(option5[i]);
+  }
+
+  lcd_set_page(7);
+  lcd_set_column(10);
+
+  for (int i = 0; i < strlen(option6); i++) {
+    lcd_write_char(option6[i]);
+  }
+    while(1);
+}
+
+void EXTI15_10_IRQHandler()
+{
+    GPIO_IRQHandling(GPIO_PIN_NO_13);
+
+    static uint8_t selected_option = 2;  // Start from option 1 (page 2)
+
+    // Remove old arrow
+    lcd_set_page(selected_option);
+    lcd_set_column(1);
+    lcd_write_char(' ');  // overwrite old arrow with a space
+
+    // Move to next option
+    selected_option++;
+    if (selected_option > 7) {
+        selected_option = 2;  // Loop back to option 1 
     }
+
+    // Draw new arrow
+    lcd_set_page(selected_option);
+    lcd_set_column(1);
+    lcd_write_char('>');
+    delay();
 }

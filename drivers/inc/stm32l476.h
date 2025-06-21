@@ -91,6 +91,7 @@ typedef struct
     volatile uint32_t SMCR;
     volatile uint32_t DIER;
     volatile uint32_t SR;
+    volatile uint32_t EGR;
     volatile uint32_t CCMR1;
     volatile uint32_t CCMR2;
     volatile uint32_t CCER;
@@ -186,7 +187,7 @@ typedef struct
     volatile uint32_t CFGR;
     volatile uint32_t EXTICR[4];
     volatile uint32_t SCSR;
-    volatile uint32_t CGGR2;
+    volatile uint32_t CFGR2;
     volatile uint32_t SWPR;
     volatile uint32_t SKR;
 
@@ -666,7 +667,7 @@ ARM Cortex M4 Processor NVIC Priority register Address
 #define SET                             ENABLE
 #define RESET                           DISABLE
 #define GPIO_PIN_SET                    SET
-#define RGPIO_PIN_RESET                 RESET
+#define GPIO_PIN_RESET                  RESET
 #define FLAG_SET 			            SET
 #define FLAG_RESET                      RESET
 #define __FPU_PRESENT                   1U 

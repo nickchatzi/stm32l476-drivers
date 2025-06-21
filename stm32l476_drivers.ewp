@@ -2115,6 +2115,9 @@
                 <name>$PROJ_DIR$\drivers\inc\i2c_driver.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\drivers\inc\lcd.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\drivers\inc\rcc_driver.h</name>
             </file>
             <file>
@@ -2134,6 +2137,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\drivers\src\i2c_driver.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\drivers\src\lcd.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\drivers\src\rcc_driver.c</name>
